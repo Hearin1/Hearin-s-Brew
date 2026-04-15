@@ -1,0 +1,294 @@
+:root {
+  /* --- Book/leaf tuning --- */
+  --page-pad-top: 14%;
+  --page-pad-bottom: 14%;
+  --page-pad-side: 7.5%;
+  --spine-gap: 2.6%;
+  --right-trim: 4.5%;
+  --leaf: 0.94;
+
+  /* text column nudge */
+  --text-nudge: 250px;
+
+  /* --- Layout tuning --- */
+  --gap: 4px;
+  --edge-left: 40px;
+  --edge-right: 16px;
+  --left-col-width: 520px;
+  --max-book-col: 95vw;
+
+  /* image nudges (positive => move right) */
+  --left-page-nudge: 5%;
+  --right-page-nudge: 5%;
+
+  /* torn edge tuning */
+  --paper-w: 88%;
+  /* matches image max-width */
+  --paper-h: 86%;
+  /* matches image max-height */
+  --paper-tint: transparent;
+  --fray-amp: 3.2;
+  /* how rough the edge is (in %) */
+  --fray-margin: 2.5;
+  /* inner margin before cuts start (in %) */
+
+  /* book stretch */
+  --stretch-x: 1.35;
+
+  /* NEW: overall scale for the book size (1 = original). Try 0.80–0.90 */
+  --book-scale: 0.86;
+
+  /* vertical offset */
+  --lift: -40px;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color: #e6e6f7;
+
+  /* CHANGED: switch to your basic background (raw GitHub URL) */
+  background:
+    url("https://raw.githubusercontent.com/Hearin1/HearinsBrewRep/main/Drawings%20I%20made/background%20blank.png") center/cover no-repeat fixed;
+  background-color: #0f1220;
+  /* fallback color under/around the image */
+}
+
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  width: 100%;
+  align-items: center
+}
+
+.controls,
+.bookWrap,
+.layout>* {
+  min-width: 0;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ---------- Header ---------- */
+.header1 {
+  position: relative;
+  text-align: center;
+}
+
+.header1 .glow {
+  display: block;
+  /* instead of inline-block */
+  width: 100%;
+  max-width: 100%;
+  padding: 28px 32px 32px;
+  /* reduce side padding */
+  border-radius: 20px;
+  background: rgba(28, 27, 68, 0.78);
+  position: relative;
+  overflow: hidden;
+}
+
+#brew-title3 {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.header1 h1 {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 0 0 10px;
+  line-height: 1.05;
+}
+
+.header1 p {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: #fff;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 28px;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Button ---------- */
+.btn {
+  display: inline-block;
+  padding: 20px 36px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  border-radius: 16px;
+  border: 0;
+  color: #0f1220;
+  background: linear-gradient(180deg, #ffd86b, #ffb94d 60%, #ffa433);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .5);
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px)
+}
+
+.hint {
+  opacity: .9;
+  font-size: 13px
+}
+
+/* ---------- Book stage ---------- */
+.bookWrap {
+  display: flex;
+  justify-content: center;
+  /* Center it in the right column */
+  width: 100%;
+  overflow: hidden;
+  /* Prevent spillover */
+}
+
+.stage {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  max-width: 100% !important;
+  /* Important: prevents the book from overlapping */
+  height: auto;
+  background-position: center;
+}
+
+/* ---------- Pages (where the artwork sits) ---------- */
+.page {
+  position: absolute;
+  top: var(--page-pad-top);
+  bottom: var(--page-pad-bottom);
+  width: calc(50% * var(--leaf) - var(--page-pad-side) - var(--spine-gap));
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.left {
+  left: var(--page-pad-side);
+  --page-nudge: var(--left-page-nudge);
+}
+
+.right {
+  left: calc(50% + var(--spine-gap));
+  width: calc(50% * var(--leaf) - var(--page-pad-side) - var(--spine-gap) - var(--right-trim));
+  --page-nudge: var(--right-page-nudge);
+}
+
+/* Torn white "paper" behind the image */
+.page::after {
+  content: "";
+  position: absolute;
+  width: var(--paper-w);
+  height: var(--paper-h);
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + var(--page-nudge)), -50%) scale(1.03);
+  background: var(--paper-tint);
+  clip-path: var(--fray-path, inset(0 0 0 0));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .28));
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Artwork */
+.page img {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: var(--paper-w);
+  max-height: var(--paper-h);
+  display: block;
+  pointer-events: none;
+  user-drag: none;
+  user-select: none;
+  opacity: 1;
+  clip-path: var(--fray-path, inset(0 0 0 0));
+  transform: translateX(var(--page-nudge));
+  transition: opacity .8s ease-in-out, transform .2s ease;
+}
+
+.page .status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #333;
+  font-weight: 600;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, .03) 0 2px, transparent 2px 8px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, .02) 0 2px, transparent 2px 8px);
+}
+
+/* Stack on small screens */
+@media (max-width: 980px) {
+  :root {
+    --left-col-width: 100%;
+    --max-book-col: 100vw;
+    --lift: 0px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: auto;
+    padding-top: 16px;
+  }
+
+  .bookWrap {
+    justify-content: center;
+  }
+
+  .controls {
+    margin-left: 0;
+  }
+
+  .header1 .peek {
+    width: 280px;
+    height: 280px;
+    top: -90px;
+    right: -90px;
+  }
+
+  .header1 h1 {
+    font-size: 30px;
+  }
+
+  .header1 p {
+    font-size: 28px;
+    max-width: 520px;
+  }
+}
+
+@media (max-width:768px) {
+  .header1 p {
+    font-size: 16px;
+  }
+}

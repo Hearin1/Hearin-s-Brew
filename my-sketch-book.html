@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hearin’s Brew — My Sketchbook</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mediaQuery.css" />
+  <link rel="stylesheet" href="skecthBook.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+  <title>Hearin's Brew - my-sketch-book</title>
+</head>
+
+<body>
+  <div style="max-width: 1350px;
+   margin:0 auto;
+    width: 100%;
+    ">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span>Hearin's Brew</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Visual Art Portfolio</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="lorcana-game-mat-concepts.html" class="nav-link">Lorcana Game Mat Concepts</a>
+              </li>
+              <li><a href="Art-Fight.html" class="nav-link">Art Fight</a></li>
+              <li><a href="my-ocs.html" class="nav-link">My OCs!</a></li>
+              <li><a href="misc-art.html" class="nav-link">Misc Art</a></li>
+              <li><a href="my-sketch-book.html" class="nav-link">My Sketchbook</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Game Dev</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="the-nautlins.html" class="nav-link">The Nautlins</a></li>
+              <li><a href="easter-hunt-game.html" class="nav-link">Easter Hunt</a></li>
+
+            </ul>
+          </li>
+          <li class="nav-item"><a href="other-artistic-works.html" class="nav-link">Other Artistic Works</a></li>
+
+        </ul>
+        <div style="padding-top:1rem">
+          <div class="sidebar-footer">
+
+            <p>Email me at:</p>
+            <a href="mailto:hearinsbrew@gmail.com">Hearinsbrew@gmail.com</a>
+
+          </div>
+        </div>
+      </nav>
+
+
+    </aside>
+
+    <main id="mainContent">
+      <header>
+        <button class="menu-trigger" onclick="toggleMenu()">
+          <span>☰</span>
+        </button>
+        <div class="header-logo">
+          <a href="index.html">Hearin's Brew</a>
+        </div>
+
+        <div class="header-links">
+          <a href="mailto:hearinsbrew@gmail.com" title="Email Me">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="https://github.com/Hearin1" target="_blank" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </header>
+      <section class="layout">
+
+        <div class="controls">
+
+          <div class="header1">
+            <div class="glow">
+
+              <h1 id="brew-title3"></h1>
+              <p>
+                Welcome to my sketchbook! These are scans and snapshots from all over the years
+                finished pieces, quick doodles, and goofy comic bits (most less than finished).<br>Have fun!
+              </p>
+            </div>
+          </div>
+
+
+        </div>
+
+
+        <!-- Right column: book -->
+        <div class="bookWrap" style="display:flex;flex-direction: column;">
+          <div id="stage" class="stage" role="img" aria-label="Open sketchbook">
+            <div class="page left">
+              <div class="status">Loading…</div><img id="leftImg" alt="Left page" />
+            </div>
+            <div class="page right">
+              <div class="status">Loading…</div><img id="rightImg" alt="Right page" />
+            </div>
+          </div>
+          <button id="randomBtn" class="btn" type="button">Random page</button>
+          <div class="hint">Click to head to a random page in my sketchbook.</div>
+        </div>
+
+      </section>
+    </main>
+    <div>
+      <script>
+        /* ---------- Animated title ---------- */
+        const text = "ᎷᎩ ᏚᏦᎬᎢᏟᎻᏴᎾᎾᏦ";
+        const title = document.getElementById("brew-title3");
+        const colors = ["#FFA500", "#FFFFFF", "#1E90FF"];
+        const spans = [];
+        for (let i = 0; i < text.length; i++) {
+          const s = document.createElement("span");
+          s.textContent = text[i];
+          s.style.transition = "color 2s ease";
+          s.style.color = colors[0];
+          title.appendChild(s);
+          spans.push(s);
+        }
+        let currentColor = 0;
+        setInterval(() => {
+          for (let i = 0; i < spans.length; i++) {
+            setTimeout(() => { spans[i].style.color = colors[(currentColor + 1) % colors.length]; }, i * 120);
+          }
+          currentColor = (currentColor + 1) % colors.length;
+        }, 3200);
+
+        /* ---------- Sketchbook logic ---------- */
+        const repoOwner = "Hearin1";
+        const repoName = "HearinsBrewRep";
+        const folders = ["Good Artworks", "Comic Strips", "Doodles"];
+
+        const stageEl = document.getElementById("stage");
+        const leftImg = document.getElementById("leftImg");
+        const rightImg = document.getElementById("rightImg");
+        const randomBtn = document.getElementById("randomBtn");
+        const leftPage = document.querySelector(".page.left");
+        const rightPage = document.querySelector(".page.right");
+
+        let allImages = [];
+        let bookAspect = 0;             // original PNG aspect (height/width)
+
+        /* keep in sync with CSS if you change it */
+        const STRETCH_X = 1.35;
+
+        /* helper to read CSS vars */
+        function cssVar(name, fallback = 1) {
+          const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+          const n = parseFloat(v);
+          return Number.isFinite(n) ? n : fallback;
+        }
+
+        /* --------- FRAY ENGINE --------- */
+        function frayPath({ segs = 18, margin = cssVar('--fray-margin', 2.5), amp = cssVar('--fray-amp', 3.2) } = {}) {
+          const pts = [];
+          const w = 100, h = 100, S = segs, m = margin, a = amp;
+          // top (L->R)
+          for (let i = 0; i <= S; i++) {
+            const x = m + (w - 2 * m) * (i / S);
+            const y = m + Math.random() * a;
+            pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+          }
+          // right (T->B)
+          for (let i = 1; i <= S; i++) {
+            const y = m + (h - 2 * m) * (i / S);
+            const x = w - m - Math.random() * a;
+            pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+          }
+          // bottom (R->L)
+          for (let i = 1; i <= S; i++) {
+            const x = w - m - (w - 2 * m) * (i / S);
+            const y = h - m - Math.random() * a;
+            pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+          }
+          // left (B->T)
+          for (let i = 1; i <= S - 1; i++) {
+            const y = h - m - (h - 2 * m) * (i / S);
+            const x = m + Math.random() * a;
+            pts.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+          }
+          return `polygon(${pts.join(",")})`;
+        }
+        function applyFray(pageEl) {
+          pageEl.style.setProperty('--fray-path', frayPath());
+        }
+
+        /* Size the stage so a stretched background fits WITHOUT cropping */
+        function layoutBook() {
+          if (!bookAspect) return;
+
+          const effectiveAspect = bookAspect / STRETCH_X;
+          const isMobile = window.innerWidth <= 768;
+
+          // MOBILE: nearly full width
+          if (isMobile) {
+            const mobilePadding = 12; // left/right spacing
+            const w = window.innerWidth - mobilePadding * 2;
+            const h = w * effectiveAspect;
+
+            stageEl.style.width = `${w}px`;
+            stageEl.style.height = `${h}px`;
+            stageEl.style.margin = "0 auto";
+            return;
+          }
+
+          // DESKTOP / TABLET
+          const availableH = Math.max(window.innerHeight - 80, 260);
+          const widthByHeight = availableH / effectiveAspect;
+
+          const edgeRight = parseInt(
+            getComputedStyle(document.documentElement).getPropertyValue('--edge-right')
+          ) || 0;
+
+          const maxColumnW = Math.min(
+            window.innerWidth * 0.95,
+            window.innerWidth - edgeRight - 24
+          );
+
+          let w = Math.max(300, Math.min(widthByHeight, maxColumnW));
+          let h = w * effectiveAspect;
+
+          const scale = cssVar('--book-scale', 0.86);
+          w *= scale;
+          h *= scale;
+
+          stageEl.style.width = `${w}px`;
+          stageEl.style.height = `${h}px`;
+          stageEl.style.margin = "";
+        }
+        (function loadBook() {
+          const img = new Image();
+          img.onload = () => {
+            bookAspect = img.height / img.width;
+            stageEl.style.backgroundImage = `url(${img.src})`;
+            layoutBook();
+            window.addEventListener('resize', layoutBook);
+          };
+          img.src = "https://raw.githubusercontent.com/Hearin1/HearinsBrewRep/main/Drawings%20I%20made/Book.png";
+        })();
+        const cloudName = "dpsbezyqy"; // Find this in your Cloudinary Dashboard
+        const tags = ["goodWorks", "doodles", "CosmicStrips"]; // The tags you used in Cloudinary
+
+        async function loadAllImages() {
+          const fetchPromises = tags.map(tag =>
+            fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`)
+              .then(res => {
+                if (!res.ok) throw new Error(`Cloudinary list failed for ${tag}: ${res.status}`);
+                return res.json();
+              })
+          );
+
+          const results = await Promise.all(fetchPromises);
+
+          allImages = results.flatMap(data =>
+            data.resources.map(img =>
+              `https://res.cloudinary.com/${cloudName}/image/upload/w_200,c_limit,f_auto,q_auto/v${img.version}/${img.public_id}.${img.format}`
+            )
+          );
+        }
+        /*
+        async function listImages(owner, repo, folder){
+          const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(folder)}?ref=main`;
+          const res = await fetch(apiUrl, { headers:{ "Accept":"application/vnd.github.v3+json" }, cache:"no-store" });
+          if(!res.ok) throw new Error(`GitHub API ${res.status}`);
+          const data = await res.json();
+          return data
+            .filter(item => item.type === "file" && /\.(png|jpe?g|gif|webp)$/i.test(item.name))
+            .map(item => item.download_url);
+        }
+        async function loadAllImages(){
+          const results = await Promise.allSettled(folders.map(f => listImages(repoOwner, repoName, f)));
+          const merged = results.filter(r=>r.status==="fulfilled").flatMap(r=>r.value);
+          allImages = [...new Set(merged)];
+        }
+        */
+        function pickTwo(arr) {
+          if (arr.length < 2) return [arr[0] ?? "", arr[1] ?? ""];
+          const a = Math.floor(Math.random() * arr.length);
+          let b = Math.floor(Math.random() * arr.length);
+          while (b === a) b = Math.floor(Math.random() * arr.length);
+          return [arr[a], arr[b]];
+        }
+        function setImageWithFade(imgEl, newSrc) {
+          const tmp = new Image();
+          tmp.onload = () => {
+            imgEl.style.opacity = 0;
+            setTimeout(() => {
+              imgEl.src = newSrc;
+              const statusEl = imgEl.parentNode.querySelector(".status");
+              if (statusEl) statusEl.style.display = "none";
+              requestAnimationFrame(() => { imgEl.style.opacity = 1; });
+            }, 300);
+          };
+          tmp.onerror = () => {
+            const statusEl = imgEl.parentNode.querySelector(".status");
+            if (statusEl) statusEl.textContent = "Couldn’t load image.";
+          };
+          tmp.src = newSrc;
+        }
+
+        function showRandom() {
+          if (allImages.length === 0) return;
+          // new frayed edge each time
+          applyFray(leftPage);
+          applyFray(rightPage);
+
+          const [L, R] = pickTwo(allImages);
+          stageEl.querySelectorAll(".status").forEach(m => m.style.display = "grid");
+          setImageWithFade(leftImg, L);
+          setImageWithFade(rightImg, R);
+        }
+
+        (async function init() {
+          try {
+            await loadAllImages();
+            if (allImages.length === 0) throw new Error("Couldn’t find images.");
+            showRandom();
+            randomBtn.addEventListener("click", showRandom);
+          } catch (err) {
+            console.error(err);
+            stageEl.querySelectorAll(".status").forEach(m => m.textContent = "Couldn’t load images.");
+          }
+        })();
+
+      </script>
+      <script src="main.js"></script>
+</body>
+
+</html>

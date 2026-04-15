@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lorcanaStyle.css">
+    <link rel="stylesheet" href="mediaQuery.css">
+    <link rel="stylesheet" href="artFight.css">
+    <link rel="stylesheet" href="miscArt.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/favicon.ico">
+    <title>Hearin's Brew - misc-art</title>
+</head>
+
+<body>
+    <div style="max-width: 1350px;
+   margin:0 auto;
+    width: 100%;
+    ">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <span>Hearin's Brew</span>
+                </div>
+                <button class="close-btn" onclick="toggleMenu()">&times;</button>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+                    <li class="nav-item">
+                        <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+                            <span>Visual Art Portfolio</span>
+                            <span class="chevron">&#9662;</span>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="lorcana-game-mat-concepts.html" class="nav-link">Lorcana Game Mat Concepts</a>
+                            </li>
+                            <li><a href="Art-Fight.html" class="nav-link">Art Fight</a></li>
+                            <li><a href="my-ocs.html" class="nav-link">My OCs!</a></li>
+                            <li><a href="misc-art.html" class="nav-link">Misc Art</a></li>
+                            <li><a href="my-sketch-book.html" class="nav-link">My Sketchbook</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+                            <span>Game Dev</span>
+                            <span class="chevron">&#9662;</span>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="the-nautlins.html" class="nav-link">The Nautlins</a></li>
+                            <li><a href="easter-hunt-game.html" class="nav-link">Easter Hunt</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a href="other-artistic-works.html" class="nav-link">Other Artistic Works</a>
+                    </li>
+
+                </ul>
+                <div style="padding-top:1rem">
+                    <div class="sidebar-footer">
+
+                        <p>Email me at:</p>
+                        <a href="mailto:hearinsbrew@gmail.com">Hearinsbrew@gmail.com</a>
+
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main id="mainContent">
+            <header>
+                <button class="menu-trigger" onclick="toggleMenu()">
+                    <span>☰</span>
+                </button>
+                <div class="header-logo">
+                    <a href="index.html">Hearin's Brew</a>
+                </div>
+
+                <div class="header-links">
+                    <a href="mailto:hearinsbrew@gmail.com" title="Email Me">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                    <a href="https://github.com/Hearin1" target="_blank" title="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </header>
+            <section class="star-section">
+                <div class="star-overlay"></div>
+                <div class="star-content">
+                    <div>
+                        <img src="assets/bg-cartoon.png" />
+                    </div>
+                    <h1 id="brew-title6"></h1>
+                    <p>I have worked on many things, to include making music, writing, and more! These are as I pursue
+                        art, and making games, I can help add creative touch to every part of my works.
+
+                        Please enjoy!
+                    </p>
+                    <div class="star-actions">
+                        <a href="#" class="primary-btn">Visit My Art Fight Page!</a>
+
+                    </div>
+                </div>
+            </section>
+            <div class="divider">
+                <h2>My Personal Favorites!</h2>
+            </div>
+
+            <section class="favorite-art-section">
+                <div class="favorite-art-box">
+                    <h2>Favorite Pieces</h2>
+                    <p>
+                        Some of my favorite pieces I have drawn.
+                    </p>
+                    <p>
+                        You may find them on other parts of my website, but I wanted them to be shown here for display.
+                        Please have fun!
+                    </p>
+                </div>
+            </section>
+
+
+
+            <section class="feature-grid-section">
+                <div class="feature-grid">
+
+                    <!-- Card 1 -->
+                    <div class="feature-card">
+                        <div class="misc-feature-image">
+                            <img src="assets/jinx.png" alt="Artwork 1">
+                        </div>
+                        <div class="feature-content">
+                            <h2>Jinx Listens</h2>
+                            <p>
+                                Listening to some soft jazz, Jinx sits and ponders what the future has for her.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="feature-card">
+                        <div class="misc-feature-image">
+                            <img src="assets/seance.png" alt="Artwork 2">
+                        </div>
+                        <div class="feature-content">
+                            <h2>The séance</h2>
+                            <p>
+                                A group of highschoolers setting out to contact their missing friend. The truth will be
+                                discovered, and honer will be brought to their friends memory.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="feature-card">
+                        <div class="misc-feature-image">
+                            <img src="assets/fire.png" alt="Artwork 1">
+                        </div>
+                        <div class="feature-content">
+                            <h2>Resting by the fire</h2>
+                            <p>
+                                After crashing, the team had to work on gathering supplies to make it back. Really
+                                though, they were not in a rush.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="feature-card">
+                        <div class="misc-feature-image">
+                            <img src="assets/background.gif" alt="Artwork 1">
+                        </div>
+                        <div class="feature-content">
+                            <h2>Rainy Nights in Tokyo</h2>
+                            <p>
+                                A friend had an image that he really loved, and used it as his new theme. He just
+                                thought a few changes would go a long way. He wanted some rain, mood lighting, and a
+                                little more life to it. So looking at this incredible piece from the artist Manojooj
+                                here: https://themes.vivaldi.net/users/ManoJooJ (Original piece)
+                                I worked to add a little more to the piece, and above is the final product.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!--start story telling-->
+
+
+
+
+
+
+            <!--end story telling-->
+
+            <footer class="main-footer">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZycWp6bmR6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3ImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/3o7TKDkDbIDJieKbVm/giphy.gif"
+                            alt="Brewing GIF" class="footer-gif">
+                        <span class="logo-text">Hearin's <span class="highlight-orange">Brew</span></span>
+                    </div>
+
+                    <p class="footer-tagline">Crafting code, art, and games </p>
+
+                    <div class="footer-bottom-line">
+                        &copy; 2026 All Rights Reserved.
+                    </div>
+                </div>
+            </footer>
+        </main>
+        <div>
+            <script>
+                (function () {
+                    const text = "ᎾᎢᎻᎬᎡ ᎪᎡᎢᏆᏚᎢᏆᏟ ᏢᎡᎾᎫᎬᏟᎢᏚ";
+                    const title = document.getElementById("brew-title6");
+                    const colors = ["#FFA500", "#FFFFFF", "#1E90FF"];
+                    for (let i = 0; i < text.length; i++) {
+                        const span = document.createElement("span");
+                        span.textContent = text[i];
+                        span.style.transition = "color 2s ease";
+                        span.style.color = colors[0];
+                        title.appendChild(span);
+                    }
+                    let currentColor = 0;
+                    setInterval(() => {
+                        const spans = title.querySelectorAll("span");
+                        for (let i = 0; i < spans.length; i++) {
+                            setTimeout(() => {
+                                spans[i].style.color = colors[(currentColor + 1) % colors.length];
+                            }, i * 200);
+                        }
+                        currentColor = (currentColor + 1) % colors.length;
+                    }, 4000);
+                })();
+            </script>
+            <script src="main.js"></script>
+</body>
+
+</html>

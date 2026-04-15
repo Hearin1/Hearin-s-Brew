@@ -1,0 +1,43 @@
+  .section-artFight {
+    display: grid; /* Use Grid instead of Flex */
+    /* This creates 3 equal columns */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem; /* Spacing between the items */
+    width: 100%;
+    margin-top: 3rem;
+    overflow-x:hidden ;
+}
+
+.section-artFight .caption-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.section-artFight .caption-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff4d6d;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.section-artFight .caption-title:hover {
+  color: #ffb703;
+  transform: scale(1.03);
+}
+
+.section-artFight .d {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+@media (max-width: 768px) {
+    .section-artFight {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+}
+}

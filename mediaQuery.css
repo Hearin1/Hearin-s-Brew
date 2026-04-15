@@ -1,0 +1,178 @@
+/* --- Responsive Layout for Mobile --- */
+
+
+@media (max-width: 600px) {
+    .section {
+        /* On phones, show 1 per row */
+        grid-template-columns: 1fr;
+    }
+}
+
+/* MOBILE VIEW: Stack vertically */
+@media (max-width: 992px) {
+    .feature-container {
+        flex-direction: column;
+        /* This stacks the elements */
+        gap: 2rem;
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .menu-trigger {
+        margin-bottom: 0;
+    }
+
+    .section {
+        /* On tablets/small laptops, show 2 per row */
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    aside {
+        /* 1. Hide it by default on mobile */
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2000;
+        /* Ensure it stays above content */
+        width: 280px;
+        box-shadow: 10px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    aside.mobile-open {
+        transform: translateX(0);
+    }
+
+    .feature-title {
+        font-size: 2.5rem;
+        /* Slightly smaller for mobile screens */
+    }
+
+    main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding: 1rem 0.3 !important;
+    }
+
+    .menu-trigger {
+        display: inline-flex !important;
+    }
+
+    header {
+        display: flex;
+    }
+
+    main.expanded header {
+        display: flex !important;
+        align-items: center;
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .section1 {
+        /* 1. Reduce vertical padding so it's not too tall on phones */
+        padding: 1rem 1.5rem;
+        min-height: auto;
+        background-size: 130px 130px;
+       background-position: right;
+        /* Let the content define the height */
+    }
+
+    .section2 {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .tiles.two {
+        grid-template-columns: 1fr !important;
+        /* 1 column on mobile */
+    }
+
+      .wrap {
+         flex-direction: column;
+         gap: 20px;
+     }
+
+     .tile {
+         max-width: 100%;
+          flex: 0 0 100%;
+     }
+
+    .feature-title {
+        /* 2. Shrink the font size so "code, draw, and write" doesn't break into tiny lines */
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+
+    .thumb {
+        width: 450px;
+        max-width: 100%;
+    }
+
+    .thumb>img {
+        position: absolute;
+        inset: 0;
+        width: 450px;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        max-width: 100%;
+    }
+
+    .secondary-btn {
+        /* 5. Make the button full-width or slightly larger for easier tapping */
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .logo-text {
+        font-size: 1.4rem;
+    }
+
+    .main-footer {
+        padding: 40px 15px;
+    }
+
+    .carousel {
+        min-height: auto;
+        aspect-ratio: auto;
+        /* let image decide height */
+    }
+
+    .divider h2 {
+        font-size: .8rem;
+    }
+
+    .section {
+        grid-template-columns: repeat(1, 1fr);
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+    }
+
+    .carousels img {
+        width: 90% important
+    }
+
+    .sidebar-footer a {
+        font-size: .7rem;
+        /* Prevents long emails from breaking layout */
+    }
+
+    .sidebar-footer p {
+        font-size: .8rem;
+        /* Prevents long emails from breaking layout */
+    }
+}

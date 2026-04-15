@@ -1,0 +1,730 @@
+ :root {
+     --sidebar-width: 280px;
+     --primary-orange: #f97316;
+     /* Clean, modern orange */
+     --orange-hover: #ea580c;
+     --sidebar-bg: #ffffff;
+     --text-dark: #1f2937;
+     --text-muted: #6b7280;
+     --bg-main: #fcfcfc;
+     --transition-speed: 0.3s;
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Cinzel', sans-serif;
+ }
+
+ body {
+     display: flex;
+     background: var(--bg-main);
+     color: var(--text-dark);
+     overflow-x: hidden;
+     min-height: 100vh;
+ }
+
+ /* --- Sidebar --- */
+ aside {
+     width: var(--sidebar-width);
+     height: 100vh;
+     background: var(--sidebar-bg);
+     color: var(--text-dark);
+     position: fixed;
+     left: 0;
+     transition: transform var(--transition-speed) ease;
+     z-index: 1000;
+     padding: 1rem;
+     display: flex;
+     flex-direction: column;
+     border-right: 1px solid #e5e7eb;
+ }
+
+ /* Class to hide sidebar */
+ aside.closed {
+     transform: translateX(-100%);
+ }
+
+ .sidebar-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 2rem;
+     padding-bottom: 1rem;
+     border-bottom: 1px solid #f3f4f6;
+ }
+
+ .brand-logo {
+     font-size: 1.5rem;
+     font-weight: 800;
+     color: var(--primary-orange);
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ .close-btn {
+     background: none;
+     border: none;
+     color: var(--text-muted);
+     font-size: 1.75rem;
+     cursor: pointer;
+     line-height: 1;
+ }
+
+ .close-btn:hover {
+     color: var(--primary-orange);
+ }
+
+ /* --- Main Navigation --- */
+ nav {
+     flex-grow: 1;
+     overflow-y: auto;
+ }
+
+ nav ul {
+     list-style: none;
+ }
+
+ .nav-item {
+     margin: 0.25rem 0;
+ }
+
+ .nav-link {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.75rem 1rem;
+     color: var(--text-dark);
+     text-decoration: none;
+     border-radius: 8px;
+     transition: 0.2s;
+     font-weight: 500;
+     cursor: pointer;
+ }
+
+ .nav-link:hover,
+ .nav-link.active {
+     background-color: #fff7ed;
+     color: var(--primary-orange);
+ }
+
+ /* Dropdown Chevron */
+ .chevron {
+     font-size: 0.8rem;
+     transition: transform 0.3s;
+     color: var(--text-muted);
+ }
+
+ .active-dropdown .chevron {
+     transform: rotate(180deg);
+     color: var(--primary-orange);
+ }
+
+ /* --- Dropdown Menus --- */
+ .dropdown-menu {
+     max-height: 0;
+     overflow: hidden;
+     transition: max-height 0.3s ease-out;
+     background: #fafafa;
+     border-radius: 8px;
+     margin-top: 2px;
+ }
+
+ /* Opened Dropdown state */
+ .active-dropdown+.dropdown-menu {
+     max-height: 1000px;
+     /* Set a max height for animation */
+ }
+
+ .dropdown-menu li a {
+     padding: 0.6rem 1rem 0.6rem 2.5rem;
+     /* Indented text */
+     font-size: 0.95rem;
+     color: var(--text-muted);
+ }
+
+ .dropdown-menu li a:hover {
+     color: var(--primary-orange);
+     background: #fff7ed;
+ }
+
+ /* --- Sidebar Footer (e.g., Logout) --- */
+ .sidebar-footer {
+     margin-top: auto;
+     border-top: 1px solid #f3f4f6;
+     padding-top: 1rem;
+ }
+
+
+
+ /* --- Main Content --- */
+ main {
+     flex-grow: 1;
+     margin-left: var(--sidebar-width);
+     min-height: 100vh;
+     transition: margin-left var(--transition-speed) ease;
+
+ }
+
+ /* When sidebar is closed, main content takes full width */
+ main.expanded {
+     margin-left: 0;
+ }
+
+ /* --- Menu Trigger Button --- */
+ .menu-trigger {
+     background: #f97316;
+     /* Your brand orange */
+     color: white;
+     border: none;
+     width: 40px;
+     height: 40px;
+     border-radius: 8px;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.2rem;
+     transition: transform 0.2s;
+ }
+
+ .menu-trigger:hover {
+     background: var(--orange-hover);
+ }
+
+ main.expanded .menu-trigger {
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+ }
+
+ /* --- Dashboard Content --- */
+
+
+
+ body {
+     font-family: 'Cinzel', serif;
+ }
+
+ /* Container for the two elements */
+ .feature-container {
+     display: flex;
+     align-items: center;
+     gap: 4rem;
+
+    /*background: rgb(204, 121, 65);*/
+     background: 
+    linear-gradient(to right, rgb(204, 121, 65),  rgb(255, 122, 60)),
+
+    /* Geometric pattern overlay */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.08) 0px,
+      rgba(255,255,255,0.08) 2px,
+      transparent 2px,
+      transparent 12px
+    );
+
+  background-blend-mode: overlay;
+     padding: 3rem;
+     border-radius: 20px;
+     border: 1px solid #f1f5f9;
+ }
+
+ /* Left Side: Image */
+ .feature-image {
+     flex: 1;
+     max-width: 420px;
+     /* Takes up 50% width */
+ }
+
+ .feature-image img {
+     width: 100%;
+     height: auto;
+     border-radius: 15px;
+     display: block;
+     object-fit: cover;
+     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+ }
+
+ /* Right Side: Content */
+ .feature-content {
+     flex: 1;
+     /* Takes up 50% width */
+ }
+
+
+
+
+ .secondary-btn {
+     display: inline-block;
+     padding: 12px 28px;
+     border: 2px solid #f97316;
+     color: #f97316;
+     text-decoration: none;
+     border-radius: 8px;
+     font-weight: 600;
+     transition: all 0.3s;
+ }
+
+ .secondary-btn:hover {
+     background: #f97316;
+     color: white;
+ }
+
+ .section {
+     display: grid;
+     /* Use Grid instead of Flex */
+     /* This creates 3 equal columns */
+     grid-template-columns: repeat(3, 1fr);
+     gap: 1rem;
+     /* Spacing between the items */
+     width: 100%;
+     margin-top: 3rem;
+     overflow-x: hidden;
+     padding-left: 3rem;
+     padding-right: 3rem;
+ }
+.home-gallery {
+font-size: 20px;
+    font-weight: bold;
+    color: #ee4e04;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+.home-gallery:hover{
+  
+  color: #ffb703;
+  transform: scale(1.03);
+}
+
+
+ .wrap {
+     display: flex;
+     flex-direction: column;
+     /* Stack image and text vertically */
+     background: #fff;
+     padding: 1.5rem;
+     border-radius: 12px;
+     border: 1px solid #e5e7eb;
+ }
+
+
+
+ .image {
+     width: 100%;
+     /* 1. Define the height you want here */
+     height: 350px;
+     border-radius: 12px;
+     overflow: hidden;
+     /* Keeps the image inside the rounded corners */
+     margin-bottom: 1rem;
+ }
+
+ .image img {
+     width: 100%;
+     height: 100%;
+     /* Fills the 350px container */
+
+     /* 2. CRITICAL: This prevents the image from looking stretched */
+     object-fit: cover;
+
+     /* 3. This centers the focus of the image */
+     object-position: center;
+
+     display: block;
+     transition: transform 0.5s ease;
+ }
+
+ .banner {
+     text-align: center
+ }
+
+ .banner .box {
+     display: inline-block;
+     padding: 40px 0;
+     border-radius: 25px;
+     background: rgba(28, 27, 68, 0.75);
+     margin-bottom: 20px;
+     box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+ }
+
+ #brew-title {
+     font-family: "Cinzel", serif;
+     font-size: clamp(44px, 9vw, 90px);
+     font-weight: 900;
+     margin: 0
+ }
+
+
+ header {
+     background: rgba(255, 255, 255, 0.7);
+     /* White with 70% transparency */
+     backdrop-filter: blur(12px);
+     /* This creates the frosted glass look */
+     -webkit-backdrop-filter: blur(12px);
+     /* Safari support */
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem 1.5rem;
+     border-bottom: 1px solid #e5e7eb;
+     position: sticky;
+     /* Keeps it at the top of the main area */
+     top: 0;
+     z-index: 100;
+     display: none;
+     transition: opacity 0.3s ease;
+     width: 100vw;
+     max-width: 100%;
+
+ }
+
+ /* Logo Styling */
+ .header-logo a {
+     font-weight: 900;
+     font-size: 1.2rem;
+     color: #000000;
+     text-decoration: none;
+     letter-spacing: -0.5px;
+ }
+
+ /* Right Side Icons */
+ .header-links {
+     display: flex;
+     gap: 15px;
+ }
+
+ .header-links a {
+     color: #000000;
+     /* Subtle grey */
+     font-size: 1.3rem;
+     transition: color 0.2s;
+     text-decoration: none;
+ }
+
+ .header-links a:hover {
+     color: #f97316;
+     /* Turns orange on hover */
+ }
+
+ .menu-trigger:hover {
+     transform: scale(1.05);
+     background: #ea580c;
+ }
+
+ main.expanded header {
+     display: flex;
+     align-items: center;
+     opacity: 1;
+ }
+
+.professional-p{
+   color:rgb(177, 5, 245);
+   font-size: 24px;
+
+}
+.professional-p a{
+   color:rgb(177, 5, 245);
+   font-size: 24px;
+
+}
+ .section1 {
+     /* 1. Background and Layout */
+     background-color: #fefefe;
+     /* Very clean off-white */
+     background-image: url("assets/brush.png");
+     /* Very subtle orange dots */
+     background-size: 200px 200px;
+     background-repeat: no-repeat;
+background-position: 15%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+
+     padding: 1rem 2rem;
+     width: 100%;
+     min-height: 450px;
+
+     /* 2. Standard Border Accents */
+     border-top: 1px solid #f1f5f9;
+     border-bottom: 1px solid #f1f5f9;
+
+     /* 3. Subtle Shadow for depth */
+     box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+ }
+
+ .self-content {
+     max-width: 750px;
+     position: relative;
+ }
+
+ /* 4. A decorative accent line above the title */
+ .self-content::before {
+     content: "";
+     display: block;
+     width: 60px;
+     height: 4px;
+     background: #f97316;
+     /* Orange accent line */
+     margin: 0 auto 20px;
+     border-radius: 10px;
+ }
+
+ .feature-title {
+     font-size: 2.8rem;
+     font-weight: 800;
+     line-height: 1.2;
+     color: #1f2937;
+     margin-bottom: 1.5rem;
+ }
+
+ .highlight {
+     color: #f97316;
+     position: relative;
+     z-index: 1;
+ }
+
+ /* Optional: Soft orange glow behind the highlighted text */
+
+
+
+ .divider {
+     /* 1. The Gradient Background */
+     background: linear-gradient(90deg, rgba(249, 116, 22, 0.541) 0%, rgba(255, 255, 255, 1) 50%, rgba(249, 116, 22, 0.582) 100%);
+
+     /* 2. Positioning and Centering */
+     text-align: center;
+     padding: 20px 0;
+     margin: 4rem 0 2.5rem;
+     width: 100%;
+
+     /* 3. Decorative Borders */
+     border-top: 1px solid rgba(249, 115, 22, 0.2);
+     border-bottom: 1px solid rgba(249, 115, 22, 0.2);
+ }
+
+ .divider h2 {
+     font-size: 2rem;
+     font-weight: 900;
+     color: #1f2937;
+     text-transform: uppercase;
+     letter-spacing: 0.15em;
+     margin: 0;
+     display: inline-block;
+     position: relative;
+ }
+
+ /* Optional: Adding a small orange dot on either side of the text for focus */
+ .divider h2::before,
+ .divider h2::after {
+     content: "•";
+     color: #f97316;
+     margin: 0 15px;
+     font-size: 1.5rem;
+     vertical-align: middle;
+ }
+
+ .sidebar-footer p {
+     font-size: .9rem;
+     /* Small, label-style text */
+     font-weight: 800;
+     color: #9ca3af;
+     /* Muted grey for the label */
+     letter-spacing: 0.1em;
+     text-transform: uppercase;
+     margin-bottom: 5px;
+ }
+
+ .sidebar-footer a {
+     font-size: 1rem;
+     font-weight: 700;
+     color: #f97316;
+     /* Brand Orange */
+     text-decoration: none;
+     transition: color 0.3s ease;
+     word-break: break-all;
+     /* Prevents long emails from breaking layout */
+ }
+
+ /* Hover effect */
+ .sidebar-footer a:hover {
+     color: #ea580c;
+     /* Darker orange on hover */
+     text-decoration: underline;
+ }
+
+ .main-footer {
+     width: 100%;
+     padding: 60px 20px;
+     background-color: #fcfcfc;
+     /* Off-white to distinguish from content */
+     border-top: 1px solid #f1f5f9;
+     margin-top: 4rem;
+     text-align: center;
+     
+ }
+
+ .footer-content {
+     max-width: 1200px;
+     margin: 0 auto;
+ }
+
+ /* Logo and GIF container */
+ .footer-logo {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 15px;
+     margin-bottom: 1.5rem;
+ }
+
+ .footer-gif {
+     width: 40px;
+     /* Keep it small and professional */
+     height: 40px;
+     object-fit: contain;
+     /* Optional: filter to make a black gif look orange */
+     /* filter: sepia(1) saturate(5) hue-rotate(340deg); */
+ }
+
+ .logo-text {
+     font-size: 1.8rem;
+     font-weight: 900;
+     color: #1f2937;
+     letter-spacing: -1px;
+     text-transform: lowercase;
+     /* Professional modern style */
+ }
+
+ .highlight-orange {
+     color: #f97316;
+ }
+
+ .footer-tagline {
+     color: #6b7280;
+     font-size: 1rem;
+     margin-bottom: 2rem;
+     font-weight: 500;
+ }
+
+ .footer-bottom-line {
+     font-size: 0.75rem;
+     color: #9ca3af;
+     text-transform: uppercase;
+     letter-spacing: 0.1em;
+     border-top: 1px solid #f1f5f9;
+
+     display: inline-block;
+     width: 200px;
+ }
+
+ /*carousel */
+ /* Carousel box */
+ /* Wrap tiles in a row */
+ .carousel-wrapper {
+     display: flex;
+     gap: 20px;
+     /* space between tiles */
+     flex-wrap: wrap;
+     /* stack on smaller screens */
+     justify-content:
+         center;
+     /* center tiles in row */
+ }
+
+ /* Each tile */
+ .section2 {
+     padding-right: 3rem;
+     padding-left: 3rem;
+ }
+
+ .tile {
+     flex: 0 0 calc(50% - 10px);
+     /* exactly 2 per row with gap compensation */
+     max-width: calc(50% - 10px);
+     display: flex;
+     flex-direction: column;
+     text-decoration: none;
+     color: inherit;
+
+ }
+
+
+ /* Carousel styles (from previous example) */
+ .carousel {
+     position: relative;
+     width: 100%;
+     border-radius: 8px;
+     overflow: hidden;
+     box-shadow: 0 8px 22px rgba(0, 0, 0, .4);
+     background: #111;
+ }
+
+ .slides {
+     position: relative;
+     width: 100%;
+     height: 0;
+     padding-top: 100%;
+     /* square */
+ }
+
+ .slide {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     opacity: 0;
+     transition: opacity 0.5s ease;
+ }
+
+ .slide.active {
+     opacity: 1;
+ }
+
+ .dots {
+     position: absolute;
+     bottom: 10px;
+     right: 10px;
+     display: flex;
+     gap: 8px;
+ }
+
+ .dot {
+     width: 10px;
+     height: 10px;
+     border-radius: 50%;
+     border: 1px solid #fff;
+     opacity: 0.7;
+     cursor: pointer;
+ }
+
+ .dot.active {
+     background: #fff;
+     opacity: 1;
+ }
+
+ /* Caption */
+ .cap {
+     padding: 12px 14px;
+ }
+
+ .cap .t {
+     font-weight: 800;
+     font-size: 24px;
+     margin: 0 0 4px;
+     color:rgba(47, 0, 255, 0.904)
+ }
+
+
+ .cap .d {
+     font-size: 14px;
+     opacity: .85;
+     margin: 0;
+ }
+

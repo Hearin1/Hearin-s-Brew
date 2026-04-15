@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lorcanaStyle.css">
+  <link rel="stylesheet" href="mediaQuery.css">
+  <link rel="stylesheet" href="artFight.css">
+  <link rel="stylesheet" href="myOcs.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+  <title>Hearin's Brew - my-ocs</title>
+</head>
+
+<body>
+  <div style="max-width: 1350px;
+   margin:0 auto;
+    width: 100%;
+    ">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span>Hearin's Brew</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Visual Art Portfolio</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="lorcana-game-mat-concepts.html" class="nav-link">Lorcana Game Mat Concepts</a>
+              </li>
+              <li><a href="Art-Fight.html" class="nav-link">Art Fight</a></li>
+              <li><a href="my-ocs.html" class="nav-link">My OCs!</a></li>
+              <li><a href="misc-art.html" class="nav-link">Misc Art</a></li>
+              <li><a href="my-sketch-book.html" class="nav-link">My Sketchbook</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Game Dev</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="the-nautlins.html" class="nav-link">The Nautlins</a></li>
+              <li><a href="easter-hunt-game.html" class="nav-link">Easter Hunt</a></li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item"><a href="other-artistic-works.html" class="nav-link">Other Artistic Works</a></li>
+
+        </ul>
+        <div style="padding-top:1rem">
+          <div class="sidebar-footer">
+
+            <p>Email me at:</p>
+            <a href="mailto:hearinsbrew@gmail.com">Hearinsbrew@gmail.com</a>
+
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main id="mainContent">
+      <header>
+        <button class="menu-trigger" onclick="toggleMenu()">
+          <span>☰</span>
+        </button>
+        <div class="header-logo">
+          <a href="index.html">Hearin's Brew</a>
+        </div>
+
+        <div class="header-links">
+          <a href="mailto:hearinsbrew@gmail.com" title="Email Me">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="https://github.com/Hearin1" target="_blank" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </header>
+      <section class="star-section">
+        <div class="star-overlay"></div>
+        <div class="star-content">
+          <div>
+            <img src="assets/bg-cartoon.png" />
+          </div>
+          <h1 id="brew-title4"></h1>
+          <p>The few OCs that I have made for some stories, and dnd games I have played!
+          </p>
+          <div class="star-actions">
+            <a href="#" class="primary-btn">Visit My Art Fight Page!</a>
+
+          </div>
+        </div>
+      </section>
+      <div class="divider">
+        <h2>Meet my OCs!</h2>
+      </div>
+
+
+      <!--start story telling-->
+
+
+
+      <section class="ocs-carousel-section">
+        <div class="ocs-bg-overlay"></div>
+
+        <div class="ocs-carousel" data-interval="4500">
+
+          <!-- Slide 1 -->
+          <div class="ocs-slide active">
+            <div class="ocs-image">
+              <img src="assets/Steve Smoking (1).jpg" alt="Character 1">
+            </div>
+            <div class="ocs-content">
+              <h1>ᏚᎢᎬᎬᏙᎬ</h1>
+              <p>
+                Steeve loves to smoke. He also has a mouth more foul than most sailors. Good thing he speaks in squeaks
+                and chirps, otherwise he would be allowed nowhere.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/Ty.jpg" alt="Character 2">
+            </div>
+            <div class="ocs-content">
+              <h1>Ty</h1>
+              <p>
+                Ty stole his parents' starship and crash-landed on a new planet. He's hoping to find parts and signal
+                his family to come find him...
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/Lux Profile.jpg" alt="Character 3">
+            </div>
+            <div class="ocs-content">
+              <h1>ᎠᎡᎪᎷ'ᎢᏆᎬᎡ</h1>
+              <p>
+                Dram'Tier is rare among his kind. The vibrant blue skin being highly sought after. He is a farmer from a
+                small town and due to this often left alone.
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/Lux Profile Greeeey Boi.jpg" alt="Character 4">
+            </div>
+            <div class="ocs-content">
+              <h1>ᎪᏞ'ᏀᎡᎬᎩ</h1>
+              <p>
+                Al'Grey is a little fella. Only 15 years old, he is curious for his kind. He dreams of traveling the
+                stars, and seeing beauty. He is working on creating a starship to explore something more than what he
+                has.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/Leggy In All His Glory.jpg" alt="Character 5">
+            </div>
+            <div class="ocs-content">
+              <h1>ᏞᎬᏀᏀᎩ</h1>
+              <p>
+                I would call Leggy a freak of nature, but that would imply nature created him. It did not. Origin does
+                not matter for Leggy, and his fight towards a better future!
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 6 -->
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/Amber.jpg" alt="Character 6">
+            </div>
+            <div class="ocs-content">
+              <h1>ᎪᎷᏴᎬᎡ</h1>
+              <p>
+                Amber was raised on Arma, a beautiful planet, similar to Earth in size and geology. Her younger brother
+                stole their family's small ship and ran away...
+              </p>
+            </div>
+          </div>
+
+          <div class="ocs-slide">
+            <div class="ocs-image">
+              <img src="assets/SpaceShroom.jpg" alt="Character 6">
+            </div>
+            <div class="ocs-content">
+              <h1>ᎷᏬᏚᎻᎩ</h1>
+              <p>
+                Mushy is a mushroom guy! No one really knows where he came from. He is just happy to learn about others.
+                Some consider him a God due to his ageless-invincible body, and his ability to travel wherever in the
+                blink of an eye.
+              </p>
+            </div>
+          </div>
+
+          <!-- Dots -->
+          <div class="ocs-dots">
+            <span class="ocs-dot active"></span>
+            <span class="ocs-dot"></span>
+            <span class="ocs-dot"></span>
+            <span class="ocs-dot"></span>
+            <span class="ocs-dot"></span>
+            <span class="ocs-dot"></span>
+            <span class="ocs-dot"></span>
+          </div>
+        </div>
+      </section>
+
+
+      <!--end story telling-->
+
+      <footer class="main-footer">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZycWp6bmR6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3ImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/3o7TKDkDbIDJieKbVm/giphy.gif"
+              alt="Brewing GIF" class="footer-gif">
+            <span class="logo-text">Hearin's <span class="highlight-orange">Brew</span></span>
+          </div>
+
+          <p class="footer-tagline">Crafting code, art, and games </p>
+
+          <div class="footer-bottom-line">
+            &copy; 2026 All Rights Reserved.
+          </div>
+        </div>
+      </footer>
+    </main>
+    <div>
+      <script>
+        (function () {
+          const text = "ᎷᎩ ᎾᏟᏚ!";
+          const title = document.getElementById("brew-title4");
+          const colors = ["#FFA500", "#FFFFFF", "#1E90FF"];
+          for (let i = 0; i < text.length; i++) {
+            const span = document.createElement("span");
+            span.textContent = text[i];
+            span.style.transition = "color 2s ease";
+            span.style.color = colors[0];
+            title.appendChild(span);
+          }
+          let currentColor = 0;
+          setInterval(() => {
+            const spans = title.querySelectorAll("span");
+            for (let i = 0; i < spans.length; i++) {
+              setTimeout(() => {
+                spans[i].style.color = colors[(currentColor + 1) % colors.length];
+              }, i * 200);
+            }
+            currentColor = (currentColor + 1) % colors.length;
+          }, 4000);
+        })();
+      </script>
+
+      <script>
+        document.querySelectorAll('.ocs-carousel').forEach(carousel => {
+          const slides = carousel.querySelectorAll('.ocs-slide');
+          const dots = carousel.querySelectorAll('.ocs-dot');
+          let current = 0;
+          const intervalTime = parseInt(carousel.dataset.interval) || 4500;
+          let autoSlide;
+
+          function showSlide(index) {
+            slides.forEach((slide, i) => {
+              slide.classList.toggle('active', i === index);
+            });
+
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i === index);
+            });
+
+            current = index;
+          }
+
+          function startAutoSlide() {
+            autoSlide = setInterval(() => {
+              const next = (current + 1) % slides.length;
+              showSlide(next);
+            }, intervalTime);
+          }
+
+          function resetAutoSlide() {
+            clearInterval(autoSlide);
+            startAutoSlide();
+          }
+
+          dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+              showSlide(index);
+              resetAutoSlide();
+            });
+          });
+
+          startAutoSlide();
+        });
+      </script>
+      <script src="main.js"></script>
+</body>
+
+</html>

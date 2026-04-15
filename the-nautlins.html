@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lorcanaStyle.css">
+  <link rel="stylesheet" href="mediaQuery.css">
+  <link rel="stylesheet" href="artFight.css">
+  <link rel="stylesheet" href="miscArt.css">
+  <link rel="stylesheet" href="nautilins.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+  <title>Hearin's Brew - misc-art</title>
+</head>
+
+<body>
+  <div style="max-width: 1350px;
+   margin:0 auto;
+    width: 100%;
+    ">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span>Hearin's Brew</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Visual Art Portfolio</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="lorcana-game-mat-concepts.html" class="nav-link">Lorcana Game Mat Concepts</a>
+              </li>
+              <li><a href="Art-Fight.html" class="nav-link">Art Fight</a></li>
+              <li><a href="my-ocs.html" class="nav-link">My OCs!</a></li>
+              <li><a href="misc-art.html" class="nav-link">Misc Art</a></li>
+              <li><a href="my-sketch-book.html" class="nav-link">My Sketchbook</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Game Dev</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="nav-link">The Nautlins</a></li>
+              <li><a href="easter-hunt-game.html" class="nav-link">Easter Hunt</a></li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item"><a href="other-artistic-works.html" class="nav-link">Other Artistic Works</a></li>
+
+        </ul>
+        <div style="padding-top:1rem">
+          <div class="sidebar-footer">
+
+            <p>Email me at:</p>
+            <a href="mailto:hearinsbrew@gmail.com">Hearinsbrew@gmail.com</a>
+
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <main id="mainContent">
+      <header>
+        <button class="menu-trigger" onclick="toggleMenu()">
+          <span>☰</span>
+        </button>
+        <div class="header-logo">
+          <a href="index.html">Hearin's Brew</a>
+        </div>
+
+        <div class="header-links">
+          <a href="mailto:hearinsbrew@gmail.com" title="Email Me">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <a href="https://github.com/Hearin1" target="_blank" title="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </header>
+      <section class="star-section">
+        <div class="star-overlay"></div>
+        <div class="star-content">
+          <div>
+            <img src="assets/bg-cartoon.png" />
+          </div>
+          <h1 id="brew-title6"></h1>
+          <p>The Nautlins was the first project I started to get into making video games. I started it on Gamemaker, and
+            moved to Godot later in the process. Please see below for the development!
+
+            Please enjoy!
+          </p>
+          <div class="star-actions">
+            <a href="https://artfight.net/~Hearin" class="primary-btn">Visit My Art Fight Page!</a>
+
+          </div>
+        </div>
+      </section>
+      <div class="divider">
+        <h2>My Personal Favorites!</h2>
+      </div>
+
+
+
+      <section class="favorite-misc-art">
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/awoken.gif" alt="The Nautlins" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">The Awoken Guardian</a>
+            <p class="d">Defender of the builders. Crafted to keep the walls safe..</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/worm.gif" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">The Mother Worm</a>
+            <p class="d">She guards that which allows access to the Ravine.</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/sif.gif" alt="The Nautlins" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Sif!</a>
+            <p class="d">She is the best of dogs, always loyal!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/nautlin.gif" alt="The Nautlins" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">The Nautlin!</a>
+            <p class="d">A species of octopus, evolving up and being better!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/cookie.jpg" alt="The Nautlins" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Cookie Man!</a>
+            <p class="d">Poor guy, will never be whole again. Maybe someone will help him one day.</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/tomato.jpg" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Tomato Plant!</a>
+            <p class="d">I am pretty sure this is a creature from Amphibia, but I drew it a while ago.</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/parker.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Parker!</a>
+            <p class="d">My cute little turtle man! He is for a tabletop game I am playing, and I needed a turtle, I
+              drew it with the vibe of the rest of the game!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/parker again.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Parker, Again!</a>
+            <p class="d">He a little scared now. I am sure it will be fine, Sweetwater is a nice town.</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/parker finale.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Parker, the Finale!</a>
+            <p class="d">The one, the only, the true Parker that fit into our DND game!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/jeff.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Jeff the Iron Fist!</a>
+            <p class="d">CHEAPER TOWN HALL!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/swimi.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">He a Swimin'</a>
+            <p class="d">He scurries, he hurries, if you scratch him behind the ear, he even purries!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/pixel.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">First Pixel Guy!</a>
+            <p class="d">The first time I ever tried to make anything using Pixel art. I was like 11 at the time, and I
+              really like the little fella!</p>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <div class="miscSingle">
+            <img src="assets/bippy.png" />
+          </div>
+          <div class="caption-box">
+            <a href="" class="caption-title">Bippy's Hair</a>
+            <p class="d">Bippy is a gnome, maybe? But his wig fell off. That sucks.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!--start story telling-->
+
+
+
+
+
+
+      <!--end story telling-->
+
+      <footer class="main-footer">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZzZycWp6bmR6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3ImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/3o7TKDkDbIDJieKbVm/giphy.gif"
+              alt="Brewing GIF" class="footer-gif">
+            <span class="logo-text">Hearin's <span class="highlight-orange">Brew</span></span>
+          </div>
+
+          <p class="footer-tagline">Crafting code, art, and games </p>
+
+          <div class="footer-bottom-line">
+            &copy; 2026 All Rights Reserved.
+          </div>
+        </div>
+      </footer>
+    </main>
+    <div>
+      <script>
+        (function () {
+          const text = "THE NAUTLINS";
+          const title = document.getElementById("brew-title6");
+          const colors = ["#FFA500", "#FFFFFF", "#1E90FF"];
+          for (let i = 0; i < text.length; i++) {
+            const span = document.createElement("span");
+            span.textContent = text[i];
+            span.style.transition = "color 2s ease";
+            span.style.color = colors[0];
+            title.appendChild(span);
+          }
+          let currentColor = 0;
+          setInterval(() => {
+            const spans = title.querySelectorAll("span");
+            for (let i = 0; i < spans.length; i++) {
+              setTimeout(() => {
+                spans[i].style.color = colors[(currentColor + 1) % colors.length];
+              }, i * 200);
+            }
+            currentColor = (currentColor + 1) % colors.length;
+          }, 4000);
+        })();
+      </script>
+      <script src="main.js"></script>
+</body>
+
+</html>

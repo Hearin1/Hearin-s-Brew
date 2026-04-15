@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+#brew-title2 {
+    font-size: 3.5rem;
+}
+
+.star-section {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 1rem 0;
+
+
+    /* The GIF Background */
+    background-image: url('assets/bg.gif');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Dark overlay to make white text pop against moving stars */
+.star-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    /* Deep navy tint at 50% opacity */
+    z-index: 1;
+}
+
+.star-content {
+    position: relative;
+    z-index: 2;
+    /* Sits above the overlay */
+    text-align: center;
+    padding: 2rem;
+    max-width: 700px;
+}
+
+.star-content h2 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.star-content p {
+    color: #e2e8f0;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    font-weight: bold
+}
+
+/* Button Styles */
+.star-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.primary-btn {
+    background: #f97316;
+    /* Brand Orange */
+    color: white;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.outline-btn {
+    background: transparent;
+    color: white;
+    padding: 12px 28px;
+    border: 2px solid white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 800;
+    transition: 0.3s;
+}
+
+.star-content img {
+    width: 220px;
+    height: 220px;
+    /* Force equal height for a perfect star */
+    object-fit: cover;
+    /* Ensures the image doesn't stretch */
+
+    /* 1. The Star Shape */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+    /* 2. Styling */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    /* Reduced padding to keep the star points sharp */
+
+    /* 3. Animation & Effects */
+    animation: float 4s ease-in-out infinite;
+    /* Note: filter: drop-shadow works better with clip-path than box-shadow */
+    filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.5));
+
+    transition: transform 0.3s ease;
+}
+
+.star-content img:hover {
+    transform: scale(2) rotate(10deg);
+}
+
+/* Floating effect to match the 'Starry' theme */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.primary-btn:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+}
+
+.outline-btn:hover {
+    background: white;
+    color: #1f2937;
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .star-content h2 {
+        font-size: 2rem;
+    }
+
+    .star-actions {
+        flex-direction: column;
+    }
+
+    .star-section {
+        min-height: 500px;
+        border-radius: 0;
+    }
+}
+
+
+.story-split-container {
+    display: flex;
+    align-items: center;
+    /* Vertically centers the text box against the image */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+
+/* Image Container */
+.story-visual {
+    flex: 1;
+    /* Takes up 50% width */
+}
+
+.story-visual img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+/* Text Container */
+.story-info {
+    flex: 1;
+    /* Takes up 50% width */
+    display: flex;
+    align-items: center;
+    /* Ensures the card itself stays centered */
+}
+
+.story-card-vibrant {
+    padding: 2.5rem;
+    border-radius: 24px;
+    color: white;
+    /* Vibrant eye-catchy gradient */
+    background: linear-gradient(135deg, #f97316 0%, #eab308 100%);
+    box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3);
+    position: relative;
+}
+
+.piglet {
+    background: linear-gradient(135deg, #c442c9 0%, #d3c4ce 100%) !important;
+    box-shadow: 0 20px 40px rgba(249, 22, 249, 0.226);
+}
+
+.tiger {
+    background: linear-gradient(135deg, #eb5c09 0%, #c618d6c9 100%) !important;
+    box-shadow: 0 20px 40px rgba(230, 22, 249, 0.3);
+}
+
+.Mickey {
+    background: linear-gradient(135deg, #7e553d 0%, #a1a31fc9 100%) !important;
+    box-shadow: 0 20px 40px rgba(99, 141, 21, 0.3);
+}
+
+.ink {
+    background: linear-gradient(135deg, #000000 0%, #cfcfc6c9 100%) !important;
+    box-shadow: 0 20px 40px rgba(78, 80, 75, 0.3);
+}
+
+.taran {
+    background: linear-gradient(135deg, #087716 0%, #4add06c9 100%) !important;
+    box-shadow: 0 20px 40px rgba(0, 255, 55, 0.356);
+}
+
+.kanga {
+    background: linear-gradient(135deg, #087716 0%, #4add06c9 100%) !important;
+    box-shadow: 0 20px 40px rgba(0, 255, 55, 0.356);
+}
+
+.eyore {
+    background: linear-gradient(135deg, #032bad 0%, #52a2e4c9 100%) !important;
+    box-shadow: 0 20px 40px rgba(58, 192, 216, 0.356);
+}
+
+.story-title {
+    font-family: "Lobster", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.story-card-vibrant p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.magic-highlight {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 10px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #fffbeb;
+}
+
+/* --- Mobile Responsive Logic --- */
+@media (max-width: 992px) {
+    .story-split-container {
+        flex-direction: column;
+        /* Stacks image on top, text on bottom */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .story-visual,
+    .story-info {
+        width: 100%;
+    }
+
+    .story-card-vibrant {
+
+        padding: 1.5rem;
+    }
+}
+
+@media(max-width:600px) {
+    #brew-title2 {
+        font-size: 2rem;
+    }
+}

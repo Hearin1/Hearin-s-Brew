@@ -1,0 +1,265 @@
+.favorite-art-section {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.favorite-art-box {
+  width: 100%;
+  max-width: 1100px;
+  padding: 50px 40px;
+  border-radius: 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  /* orange colorful gradient background */
+  background: linear-gradient(135deg,
+      #ff3c00 0%,
+      #cf6e0c 20%,
+      #c47d1b 40%,
+      #c9670c 60%,
+      #ff7b00 80%,
+      #ff816b 100%);
+
+  box-shadow: 0 14px 35px rgba(255, 120, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* soft glow decoration */
+.favorite-art-box::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  top: -80px;
+  left: -80px;
+  filter: blur(10px);
+}
+
+.favorite-art-box::after {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  bottom: -70px;
+  right: -70px;
+  filter: blur(10px);
+}
+
+.favorite-art-box h2 {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  /* gradient text */
+  background: linear-gradient(90deg, #fff3e0 0%, #ffffff 25%, #ffd199 55%, #ffb347 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-art-box p {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto 14px;
+  max-width: 780px;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.96);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.favorite-art-box p:last-child {
+  margin-bottom: 0;
+}
+
+.favorite-misc-art {
+  display: grid;
+  /* Use Grid instead of Flex */
+  /* This creates 3 equal columns */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  /* Spacing between the items */
+  width: 100%;
+  margin-top: 3rem;
+  overflow-x: hidden;
+}
+
+.miscSingle {
+  width: 100%;
+  /* 1. Define the height you want here */
+
+  border-radius: 12px;
+  overflow: hidden;
+  /* Keeps the image inside the rounded corners */
+  margin-bottom: 1rem;
+}
+
+
+
+.miscSingle img {
+  width: 100%;
+  height: 100%;
+  /* Fills the 350px container */
+
+  /* 2. CRITICAL: This prevents the image from looking stretched */
+  object-fit: cover;
+
+  /* 3. This centers the focus of the image */
+  object-position: center;
+
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+
+.feature-grid-section {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+
+  justify-content: center;
+}
+
+.feature-grid {
+  width: 100%;
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  /* 2 cards in one row on desktop */
+  gap: 30px;
+}
+
+/* Each card = image left + text right */
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+/* Image side */
+.section-artFight .caption-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.favorite-misc-art .caption-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff4d6d;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+.favorite-misc-art .caption-title:hover {
+  color: #ffb703;
+  transform: scale(1.03);
+}
+
+.favorite-misc-art .d {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+section {
+  padding-right: 3rem;
+  padding-left: 3rem;
+}
+
+.misc-feature-image {
+  width: 750px;
+}
+
+.misc-feature-image img {
+  width: 100%;
+  aspect-ratio: 764 / 534;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Text side */
+.feature-content {
+  flex: 1;
+}
+
+.feature-content h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  font-weight: 800;
+  color: #f09c00;
+}
+
+.feature-content p {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+    /* 1 card per row */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .feature-card {
+    flex-direction: column;
+    /* image on top, text below */
+    text-align: center;
+  }
+
+  .misc-feature-image {
+    width: 100%;
+    flex: none;
+  }
+
+  .feature-content {
+    width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .favorite-art-section {
+    padding: 40px 15px;
+  }
+
+  section {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .favorite-art-box {
+    padding: 35px 22px;
+    border-radius: 18px;
+  }
+
+  .favorite-misc-art {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+}

@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Egg Collector 3D - Resizable Pane</title>
+  <link rel="stylesheet" href="easterHunt.css">
+  <link rel="stylesheet" href="mediaQuery.css">
+  <link rel="icon" type="image/png" href="assets/favicon.ico">
+
+  <style>
+    :root {
+      --panel: rgba(18, 22, 32, 0.78);
+      --text: #e9eef7;
+      --muted: rgba(233, 238, 247, 0.72);
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      --radius: 14px;
+      --border: 1px solid rgba(255, 255, 255, 0.10);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #0b0d14;
+      color: var(--text);
+      font-family: var(--sans);
+      user-select: none;
+    }
+
+    #layout {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      background: #0b0d14;
+    }
+
+    #gamePane {
+      position: relative;
+      width: 72vw;
+      min-width: 420px;
+      max-width: calc(100vw - 320px);
+      height: 100%;
+      background: #0b0d14;
+      overflow: hidden;
+    }
+
+    #divider {
+      width: 10px;
+      cursor: col-resize;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    #uiPane {
+      position: relative;
+      flex: 1;
+      min-width: 320px;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(1200px 800px at 30% 0%, rgba(255, 120, 80, 0.10), transparent 60%),
+        radial-gradient(1000px 700px at 70% 10%, rgba(120, 120, 255, 0.08), transparent 60%),
+        #0b0d14;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #hud {
+      position: absolute;
+      inset: 14px 14px auto 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      min-width: 320px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .title {
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .mono {
+      font-family: var(--mono);
+    }
+
+    .stats {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 10px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .stat .k {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .stat .v {
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .btns {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-family: var(--sans);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.05s ease, background 0.15s ease, border-color 0.15s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    button.primary {
+      background: rgba(115, 215, 255, 0.18);
+      border-color: rgba(115, 215, 255, 0.35);
+    }
+
+    button.primary:hover {
+      background: rgba(115, 215, 255, 0.24);
+    }
+
+    button.danger {
+      background: rgba(255, 125, 154, 0.14);
+      border-color: rgba(255, 125, 154, 0.30);
+    }
+
+    button.danger:hover {
+      background: rgba(255, 125, 154, 0.20);
+    }
+
+    #help {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      max-width: 520px;
+    }
+
+    .key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(233, 238, 247, 0.88);
+    }
+
+    .kbdRow {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    #toast {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      z-index: 30;
+      background: rgba(10, 12, 18, 0.72);
+      border: var(--border);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+      max-width: min(760px, calc(100vw - 32px));
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    #overlay.show {
+      display: flex;
+    }
+
+    #shop {
+      width: min(760px, calc(100vw - 28px));
+      border-radius: 22px;
+      background: rgba(18, 22, 32, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    #shop header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    #shop header .h {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    #shop main {
+      padding: 14px 16px 16px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .big {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+
+    ul {
+      margin: 10px 0 0 18px;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .shopActions {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      color: rgba(233, 238, 247, 0.85);
+      background: #0b0d14;
+    }
+
+    #fallback.show {
+      display: flex;
+    }
+
+    #fallback .box {
+      max-width: 720px;
+      background: rgba(18, 22, 32, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="max-width: 1350px;
+   margin:0 auto;
+    width: 100%;
+    ">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span>Hearin's Brew</span>
+        </div>
+        <button class="close-btn" onclick="toggleMenu()">&times;</button>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Visual Art Portfolio</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="lorcana-game-mat-concepts.html" class="nav-link">Lorcana Game Mat Concepts</a></li>
+              <li><a href="Art-Fight.html" class="nav-link">Art Fight</a></li>
+              <li><a href="my-ocs.html" class="nav-link">My OCs!</a></li>
+              <li><a href="misc-art.html" class="nav-link">Misc Art</a></li>
+              <li><a href="my-sketch-book.html" class="nav-link">My Sketchbook</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <div class="nav-link dropdown-toggle" onclick="toggleDropdown(this)">
+              <span>Game Dev</span>
+              <span class="chevron">&#9662;</span>
+            </div>
+            <ul class="dropdown-menu">
+              <li><a href="the-nautlins.html" class="nav-link">The Nautlins</a></li>
+              <li><a href="easter-hunt-game.html" class="nav-link">Easter Hunt</a></li>
+
+            </ul>
+          </li>
+
+          <li class="nav-item"><a href="other-artistic-works.html" class="nav-link">Other Artistic Works</a></li>
+        </ul>
+        <div style="padding-top:1rem">
+          <div class="sidebar-footer">
+
+            <p>Email me at:</p>
+            <a href="mailto:hearinsbrew@gmail.com">Hearinsbrew@gmail.com</a>
+
+          </div>
+        </div>
+      </nav>
+
+
+    </aside>
+
+    <main id="mainContent">
+
+
+
+
+
+
+      <div id="layout">
+
+        <div id="gamePane">
+          <div class="menu-trigger" onclick="toggleMenu()">
+            <span>☰</span>
+          </div>
+          <div id="fallback">
+            <div class="box">
+              <div style="font-size:20px;font-weight:800;margin-bottom:8px;">Game failed to load</div>
+              <div style="color:rgba(233,238,247,0.75);line-height:1.4;">
+                Open DevTools → Console for import/WebGL errors. This file uses a stable Three.js CDN import.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="divider" title="Drag to resize the game pane"></div>
+        <div id="uiPane">
+          <div id="hud">
+            <div class="panel">
+              <div class="row">
+                <div class="title">Egg Collector 3D</div>
+                <div class="muted mono" id="version">three.js</div>
+              </div>
+
+              <div class="stats">
+                <div class="stat">
+                  <div class="k">Eggs</div>
+                  <div class="v" id="eggs">0</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Gemstone eggs</div>
+                  <div class="v" id="gems">0</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Eggs / collect</div>
+                  <div class="v" id="yield">1.0</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Auto rate</div>
+                  <div class="v" id="rate">0.00/s</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Eggs nearby</div>
+                  <div class="v" id="nearby">0</div>
+                </div>
+                <div class="stat">
+                  <div class="k">Gnomes</div>
+                  <div class="v" id="gnomes">0</div>
+                </div>
+              </div>
+
+              <div class="btns">
+                <button class="primary" id="collectBtn">Collect eggs</button>
+                <button id="shopBtn">Shop</button>
+                <button id="fitBtn" title="Fit game pane nicely">Fit</button>
+                <button class="danger" id="resetBtn" title="Resets your save">Reset</button>
+              </div>
+
+              <div class="muted" style="margin-top:10px">
+                Drag the divider to resize the game. Arrow keys look. Space: <b>collect</b>.
+              </div>
+            </div>
+          </div>
+
+          <div id="help" class="panel">
+            <div class="title">Controls</div>
+            <div class="kbdRow">
+              <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span>
+              <span class="key">Space</span><span class="key">Shift</span>
+              <span class="key">↑</span><span class="key">↓</span><span class="key">←</span><span class="key">→</span>
+            </div>
+            <div class="small" style="margin-top:8px">
+              Move, sprint, look with arrows. Space: collect eggs (1/100 collects are gemstone).
+            </div>
+          </div>
+
+          <div id="toast"></div>
+        </div>
+      </div>
+
+      <div id="overlay" aria-hidden="true">
+        <div id="shop" role="dialog" aria-modal="true">
+          <header>
+            <div class="h">
+              <div class="title">Gnome Shop</div>
+              <div class="muted">Gnomes follow you and keep up. Hat color is random per gnome.</div>
+            </div>
+            <button id="closeShop">Close</button>
+          </header>
+          <main>
+            <div class="card">
+              <h3>Gnome Helper</h3>
+              <p>Each gnome performs <b>1 collect every 4 seconds</b> (plus gemstone bonus).</p>
+              <ul>
+                <li>Gemstone eggs are <b>1/100 per collect</b> globally (button, space, gnome, walk-over).</li>
+              </ul>
+              <div class="shopActions">
+                <button class="primary" id="buyGnome">Buy 1 gnome</button>
+                <button id="buyMax">Buy max</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="row">
+                <div>
+                  <div class="muted">Next gnome cost</div>
+                  <div class="big mono" id="gnomeCost">10</div>
+                </div>
+                <div>
+                  <div class="muted">You have</div>
+                  <div class="big mono"><span id="eggs2">0</span> eggs</div>
+                </div>
+              </div>
+              <div style="margin-top:12px" class="muted">
+                <div><b>Gemstone bonus</b></div>
+                <div class="small">Each gemstone egg adds <span class="mono">+0.1</span> eggs/collect.</div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <script type="module">
+    const fallback = document.getElementById("fallback");
+    const gamePane = document.getElementById("gamePane");
+
+    try {
+      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js");
+
+      // ----------------------------
+      // Save / state
+      // ----------------------------
+      const SAVE_KEY = "egg_collector_3d_save_v6_collect_gems_global";
+      const state = {
+        eggs: 0, gems: 0, gnomes: 0, eggFraction: 0,
+        pos: new THREE.Vector3(0, 2.0, 6),
+        vel: new THREE.Vector3(0, 0, 0),
+        yaw: 0, pitch: -0.08,
+        visited: {}, cellEggs: {},
+        gnomeHatColors: []
+      };
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(SAVE_KEY);
+          if (!raw) return;
+          const s = JSON.parse(raw);
+          if (typeof s.eggs === "number") state.eggs = Math.max(0, Math.floor(s.eggs));
+          if (typeof s.gems === "number") state.gems = Math.max(0, Math.floor(s.gems));
+          if (typeof s.gnomes === "number") state.gnomes = Math.max(0, Math.floor(s.gnomes));
+          if (typeof s.eggFraction === "number") state.eggFraction = Math.max(0, s.eggFraction);
+          if (s.visited && typeof s.visited === "object") state.visited = s.visited;
+          if (s.cellEggs && typeof s.cellEggs === "object") state.cellEggs = s.cellEggs;
+          if (Array.isArray(s.gnomeHatColors)) state.gnomeHatColors = s.gnomeHatColors;
+        } catch { }
+      }
+      function save() {
+        try {
+          localStorage.setItem(SAVE_KEY, JSON.stringify({
+            eggs: state.eggs, gems: state.gems, gnomes: state.gnomes, eggFraction: state.eggFraction,
+            visited: state.visited, cellEggs: state.cellEggs, gnomeHatColors: state.gnomeHatColors
+          }));
+        } catch { }
+      }
+
+      // ----------------------------
+      // UI
+      // ----------------------------
+      const $ = (id) => document.getElementById(id);
+      const eggsEl = $("eggs"), eggs2El = $("eggs2"), gemsEl = $("gems"), yieldEl = $("yield"),
+        gnomesEl = $("gnomes"), rateEl = $("rate"), nearbyEl = $("nearby"),
+        gnomeCostEl = $("gnomeCost"), toastEl = $("toast"), overlayEl = $("overlay"),
+        versionEl = $("version");
+
+      versionEl.textContent = "three r182 / 0.182.0";
+
+      let toastTimer = 0;
+      function toast(msg, tone = "info") {
+        toastEl.textContent = msg;
+        toastEl.style.borderColor =
+          tone === "good" ? "rgba(125,255,154,0.35)" :
+            tone === "warn" ? "rgba(255,211,125,0.35)" :
+              tone === "bad" ? "rgba(255,125,154,0.35)" :
+                "rgba(255,255,255,0.12)";
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1400);
+      }
+
+      function gnomeCost(n) { return Math.max(1, Math.round(10 * Math.pow(1.35, n))); }
+      function eggsPerCollect() { return 1 + state.gems * 0.1; }
+      function autoCollectsPerSec() { return state.gnomes / 4; }
+
+      function updateUI(near = null) {
+        eggsEl.textContent = String(state.eggs);
+        eggs2El.textContent = String(state.eggs);
+        gemsEl.textContent = String(state.gems);
+        yieldEl.textContent = eggsPerCollect().toFixed(1);
+        gnomesEl.textContent = String(state.gnomes);
+        rateEl.textContent = (autoCollectsPerSec() * eggsPerCollect()).toFixed(2) + "/s";
+        gnomeCostEl.textContent = String(gnomeCost(state.gnomes));
+        if (near !== null) nearbyEl.textContent = String(near);
+      }
+      function awardEggs(amountFloat) {
+        const total = amountFloat + state.eggFraction;
+        const whole = Math.floor(total);
+        state.eggFraction = total - whole;
+        if (whole > 0) state.eggs += whole;
+      }
+
+      // Global 1/100 gemstone per collect
+      function rollGemstone() { return Math.random() < 0.01; }
+
+      function applyCollectReward(isGem) {
+        if (isGem) {
+          state.gems += 1;
+          toast(`Gemstone egg! Bonus now ${eggsPerCollect().toFixed(1)} eggs/collect`, "good");
+        } else {
+          toast("Collected an egg!", "good");
+        }
+        awardEggs(eggsPerCollect());
+        save();
+      }
+
+      // ----------------------------
+      // Renderer in pane
+      // ----------------------------
+      const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.setClearColor(0x0b0d14, 1);
+      gamePane.appendChild(renderer.domElement);
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0b0d14);
+      scene.fog = new THREE.Fog(0x0b0d14, 22, 130);
+
+      const camera = new THREE.PerspectiveCamera(70, 1, 0.05, 450);
+
+      function resizeToPane() {
+        const w = Math.max(2, gamePane.clientWidth);
+        const h = Math.max(2, gamePane.clientHeight);
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resizeToPane();
+      new ResizeObserver(resizeToPane).observe(gamePane);
+
+      // Lighting
+      scene.add(new THREE.HemisphereLight(0xffc9a1, 0x1b2336, 0.70));
+      scene.add(new THREE.AmbientLight(0xffffff, 0.18));
+
+      const sun = new THREE.DirectionalLight(0xffd1a6, 1.05);
+      sun.position.set(18, 22, 10);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.near = 0.5;
+      sun.shadow.camera.far = 160;
+      sun.shadow.camera.left = -50;
+      sun.shadow.camera.right = 50;
+      sun.shadow.camera.top = 50;
+      sun.shadow.camera.bottom = -50;
+      scene.add(sun);
+
+      // Sky + stars + egg moon
+      const skyGeo = new THREE.SphereGeometry(280, 32, 16);
+      const skyMat = new THREE.ShaderMaterial({
+        side: THREE.BackSide,
+        uniforms: {
+          topColor: { value: new THREE.Color(0x140b2a) },
+          midColor: { value: new THREE.Color(0xff6b4a) },
+          horizonColor: { value: new THREE.Color(0xffc38a) },
+          bottomColor: { value: new THREE.Color(0x0b0d14) },
+        },
+        vertexShader: `
+          varying vec3 vWorldPosition;
+          void main() {
+            vec4 wp = modelMatrix * vec4(position, 1.0);
+            vWorldPosition = wp.xyz;
+            gl_Position = projectionMatrix * viewMatrix * wp;
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vWorldPosition;
+          uniform vec3 topColor;
+          uniform vec3 midColor;
+          uniform vec3 horizonColor;
+          uniform vec3 bottomColor;
+          void main() {
+            float h = normalize(vWorldPosition).y;
+            float t = clamp((h + 0.2) / 1.2, 0.0, 1.0);
+            float horizon = exp(-pow((h - 0.02) * 6.0, 2.0));
+            vec3 col = mix(bottomColor, horizonColor, smoothstep(0.0, 0.45, t));
+            col = mix(col, midColor, horizon * 0.85);
+            col = mix(col, topColor, smoothstep(0.55, 1.0, t));
+            gl_FragColor = vec4(col, 1.0);
+          }
+        `
+      });
+      scene.add(new THREE.Mesh(skyGeo, skyMat));
+
+      const starCount = 1100;
+      const starPositions = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount; i++) {
+        const u = Math.random(), v = Math.random();
+        const theta = 2 * Math.PI * u;
+        const phi = Math.acos(2 * v - 1);
+        const r = 240 + Math.random() * 20;
+        let x = r * Math.sin(phi) * Math.cos(theta);
+        let y = r * Math.cos(phi);
+        let z = r * Math.sin(phi) * Math.sin(theta);
+        y = Math.max(y, 15 + Math.random() * 180);
+        starPositions[i * 3 + 0] = x; starPositions[i * 3 + 1] = y; starPositions[i * 3 + 2] = z;
+      }
+      const starGeo = new THREE.BufferGeometry();
+      starGeo.setAttribute("position", new THREE.BufferAttribute(starPositions, 3));
+      const stars = new THREE.Points(
+        starGeo,
+        new THREE.PointsMaterial({ color: 0xffffff, size: 0.9, sizeAttenuation: true, transparent: true, opacity: 0.85 })
+      );
+      scene.add(stars);
+
+      const moon = new THREE.Mesh(
+        new THREE.SphereGeometry(7.8, 28, 22),
+        new THREE.MeshStandardMaterial({
+          color: 0xf2f0ea, emissive: 0x404050, emissiveIntensity: 0.55, roughness: 0.75, metalness: 0.0
+        })
+      );
+      moon.scale.set(0.85, 1.15, 0.85);
+      moon.position.set(-78, 92, -135);
+      scene.add(moon);
+
+      // Terrain noise
+      const TERRAIN_SIZE = 240, TERRAIN_SEG = 160;
+      function hash2(x, z) { let n = x * 374761393 + z * 668265263; n = (n ^ (n >> 13)) * 1274126177; n = n ^ (n >> 16); return (n >>> 0) / 4294967295; }
+      function smoothstep(t) { return t * t * (3 - 2 * t); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function valueNoise(x, z) {
+        const xi = Math.floor(x), zi = Math.floor(z);
+        const xf = x - xi, zf = z - zi;
+        const a = hash2(xi, zi), b = hash2(xi + 1, zi), c = hash2(xi, zi + 1), d = hash2(xi + 1, zi + 1);
+        const u = smoothstep(xf), v = smoothstep(zf);
+        return lerp(lerp(a, b, u), lerp(c, d, u), v);
+      }
+      function heightAt(x, z) {
+        const s = 0.06;
+        const n1 = valueNoise(x * s, z * s);
+        const n2 = valueNoise(x * s * 2.1 + 19.3, z * s * 2.1 - 7.7);
+        let h = (n1 * 2.0 + n2 * 1.0) * 2.3;
+        h += Math.sin(x * 0.06) * 0.9 + Math.cos(z * 0.05) * 0.7;
+        const p1 = new THREE.Vector2(x + 40, z + 20).length(); if (p1 < 30) h = Math.max(h, 6.5);
+        const p2 = new THREE.Vector2(x - 55, z - 35).length(); if (p2 < 26) h = Math.max(h, 8.0);
+        return Math.max(0, Math.min(10.5, h));
+      }
+
+      const terrainGeo = new THREE.PlaneGeometry(TERRAIN_SIZE, TERRAIN_SIZE, TERRAIN_SEG, TERRAIN_SEG);
+      terrainGeo.rotateX(-Math.PI / 2);
+      const tpos = terrainGeo.attributes.position;
+      for (let i = 0; i < tpos.count; i++) { const x = tpos.getX(i), z = tpos.getZ(i); tpos.setY(i, heightAt(x, z)); }
+      terrainGeo.computeVertexNormals();
+      const terrain = new THREE.Mesh(
+        terrainGeo,
+        new THREE.MeshStandardMaterial({ color: 0x1c2738, roughness: 0.98, metalness: 0.0 })
+      );
+      terrain.receiveShadow = true;
+      scene.add(terrain);
+
+      // Grass
+      const bladeGeo = new THREE.PlaneGeometry(0.12, 1.05, 1, 6);
+      bladeGeo.translate(0, 0.525, 0);
+      const grassMat = new THREE.MeshStandardMaterial({ color: 0x2a7a3a, roughness: 0.95, metalness: 0.0, side: THREE.DoubleSide });
+
+      const windUniforms = { uTime: { value: 0 }, uWindStrength: { value: 0.22 }, uWindSpeed: { value: 0.85 } };
+      grassMat.onBeforeCompile = (shader) => {
+        shader.uniforms.uTime = windUniforms.uTime;
+        shader.uniforms.uWindStrength = windUniforms.uWindStrength;
+        shader.uniforms.uWindSpeed = windUniforms.uWindSpeed;
+        shader.vertexShader = shader.vertexShader.replace("#include <common>", `#include <common>
+uniform float uTime; uniform float uWindStrength; uniform float uWindSpeed;`);
+        shader.vertexShader = shader.vertexShader.replace("#include <begin_vertex>", `#include <begin_vertex>
+#ifdef USE_INSTANCING
+  float ix = instanceMatrix[3][0];
+  float iz = instanceMatrix[3][2];
+  float seed = ix * 0.17 + iz * 0.23;
+#else
+  float seed = position.x * 0.7 + position.y * 0.9;
+#endif
+  float tip = clamp(transformed.y / 1.05, 0.0, 1.0);
+  float w = sin(uTime * uWindSpeed + seed) * uWindStrength;
+  transformed.x += w * tip * tip;
+  transformed.z += cos(uTime * uWindSpeed * 0.83 + seed) * (uWindStrength * 0.55) * tip * tip;`);
+      };
+
+      const GRASS_COUNT = 14000;
+      const grassA = new THREE.InstancedMesh(bladeGeo, grassMat, GRASS_COUNT);
+      const grassB = new THREE.InstancedMesh(bladeGeo, grassMat, GRASS_COUNT);
+      grassA.receiveShadow = true; grassB.receiveShadow = true;
+      const tmpObj = new THREE.Object3D();
+      const area = TERRAIN_SIZE * 0.96;
+      for (let i = 0; i < GRASS_COUNT; i++) {
+        const x = (Math.random() - 0.5) * area, z = (Math.random() - 0.5) * area, y = heightAt(x, z);
+        const h = 0.55 + Math.random() * 0.95;
+        tmpObj.position.set(x, y, z);
+        tmpObj.rotation.set(0, Math.random() * Math.PI * 2, 0);
+        tmpObj.scale.setScalar(h);
+        tmpObj.updateMatrix(); grassA.setMatrixAt(i, tmpObj.matrix);
+        tmpObj.rotation.y += Math.PI / 2; tmpObj.updateMatrix(); grassB.setMatrixAt(i, tmpObj.matrix);
+      }
+      grassA.instanceMatrix.needsUpdate = true; grassB.instanceMatrix.needsUpdate = true;
+      scene.add(grassA, grassB);
+
+      // Eggs in world (visual props to pick up)
+      const eggsGroup = new THREE.Group(); scene.add(eggsGroup);
+      const eggMat = new THREE.MeshStandardMaterial({ color: 0xffe08a, roughness: 0.65, metalness: 0.05 });
+      const gemEggMat = new THREE.MeshStandardMaterial({ color: 0x7df7ff, emissive: 0x2fd6ff, emissiveIntensity: 0.9, roughness: 0.25, metalness: 0.25 });
+
+      function makeEggVisual() {
+        const m = new THREE.Mesh(new THREE.SphereGeometry(0.22, 20, 16), eggMat.clone());
+        m.scale.set(0.85, 1.15, 0.85);
+        m.castShadow = true;
+        m.userData.bob = Math.random() * Math.PI * 2;
+        return m;
+      }
+
+      // Respawn / cells
+      const CELL = 18;
+      const VISITED_RESPAWN_MS = 85000;
+      const UNVISITED_RESPAWN_MS = 32000;
+      const MAX_WORLD_EGGS = 32;
+
+      function cellKey(x, z) { return Math.floor(x / CELL) + "," + Math.floor(z / CELL); }
+      function markVisited(x, z) { state.visited[cellKey(x, z)] = Date.now(); }
+      function randomPointInCell(key) {
+        const [cx, cz] = key.split(",").map(Number);
+        const x0 = cx * CELL, z0 = cz * CELL;
+        const x = x0 + (Math.random() - 0.5) * CELL;
+        const z = z0 + (Math.random() - 0.5) * CELL;
+        return new THREE.Vector3(x, heightAt(x, z), z);
+      }
+      function spawnEggInCell(key) {
+        const p = randomPointInCell(key);
+        const egg = makeEggVisual();
+        egg.position.set(p.x, p.y + 0.12, p.z);
+        egg.rotation.y = Math.random() * Math.PI * 2;
+        eggsGroup.add(egg);
+        const ce = state.cellEggs[key] || { count: 0, nextRespawnMs: 0 };
+        ce.count += 1; state.cellEggs[key] = ce;
+      }
+      function tryRespawnEggs() {
+        if (eggsGroup.children.length >= MAX_WORLD_EGGS) return;
+        const base = cellKey(state.pos.x, state.pos.z);
+        const [bcx, bcz] = base.split(",").map(Number);
+        const now = Date.now();
+        const candidates = [];
+        for (let dx = -3; dx <= 3; dx++) {
+          for (let dz = -3; dz <= 3; dz++) {
+            const key = (bcx + dx) + "," + (bcz + dz);
+            const visited = !!state.visited[key];
+            const ce = state.cellEggs[key] || { count: 0, nextRespawnMs: 0 };
+            if (now < (ce.nextRespawnMs || 0)) continue;
+            if ((ce.count || 0) >= 3) continue;
+
+            const last = state.visited[key] || 0;
+            const age = Math.min(300000, Math.max(0, now - last));
+            const freshness = age / 300000;
+            const weight = visited ? (0.35 + 0.65 * freshness) : 1.15;
+            candidates.push({ key, visited, weight });
+          }
+        }
+        if (!candidates.length) return;
+        let sum = 0; for (const c of candidates) sum += c.weight;
+        let r = Math.random() * sum, pick = candidates[0];
+        for (const c of candidates) { r -= c.weight; if (r <= 0) { pick = c; break; } }
+        spawnEggInCell(pick.key);
+        const ce = state.cellEggs[pick.key] || { count: 0, nextRespawnMs: 0 };
+        ce.nextRespawnMs = now + (pick.visited ? VISITED_RESPAWN_MS : UNVISITED_RESPAWN_MS);
+        state.cellEggs[pick.key] = ce;
+      }
+      function seedInitialEggs() { for (let i = 0; i < 26; i++) tryRespawnEggs(); }
+
+      function nearestEggTo(pos, maxDist) {
+        let best = null, bestD = Infinity;
+        for (const egg of eggsGroup.children) {
+          const d = egg.position.distanceTo(pos);
+          if (d < bestD) { bestD = d; best = egg; }
+        }
+        return (best && bestD <= maxDist) ? { egg: best, dist: bestD } : null;
+      }
+
+      function collectFromWorldEgg(egg) {
+        // Determine gemstone by global collect chance at collect-time
+        const isGem = rollGemstone();
+
+        // Update the egg's visuals to match what was collected (for a tiny instant effect)
+        // (optional; it is removed immediately)
+        egg.material = (isGem ? gemEggMat : eggMat);
+
+        // remove world egg
+        eggsGroup.remove(egg);
+
+        // cell bookkeeping + cooldown
+        const key = cellKey(egg.position.x, egg.position.z);
+        const ce = state.cellEggs[key] || { count: 0, nextRespawnMs: 0 };
+        ce.count = Math.max(0, (ce.count || 0) - 1);
+        const visited = !!state.visited[key];
+        ce.nextRespawnMs = Date.now() + (visited ? VISITED_RESPAWN_MS : UNVISITED_RESPAWN_MS);
+        state.cellEggs[key] = ce;
+
+        applyCollectReward(isGem);
+        tryRespawnEggs();
+      }
+
+      function countEggsNearPlayer(r = 14) {
+        let n = 0;
+        for (const egg of eggsGroup.children) if (egg.position.distanceTo(state.pos) <= r) n++;
+        return n;
+      }
+
+      function doCollectAction() {
+        // One "collect" action: prefer nearby world egg; else just award a rolled egg
+        const hit = nearestEggTo(state.pos, 4.2);
+        if (hit) {
+          collectFromWorldEgg(hit.egg);
+          return;
+        }
+        // no world egg nearby -> still counts as a collect, roll gemstone globally
+        const isGem = rollGemstone();
+        applyCollectReward(isGem);
+        tryRespawnEggs();
+      }
+
+      // ----------------------------
+      // Gnomes
+      // ----------------------------
+      const gnomesGroup = new THREE.Group(); scene.add(gnomesGroup);
+      function randomHatColorHex() {
+        const palette = [0xff6b8a, 0x7df7ff, 0xffd37d, 0x7dff9a, 0xb68cff, 0xff9f40, 0x4cc9f0];
+        if (Math.random() < 0.7) return palette[Math.floor(Math.random() * palette.length)];
+        const c = new THREE.Color().setHSL(Math.random(), 0.75, 0.58);
+        return c.getHex();
+      }
+      function makeGnome(hatHex) {
+        const g = new THREE.Group();
+        const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.22, 6, 12),
+          new THREE.MeshStandardMaterial({ color: 0x98ffb5, roughness: 0.85, metalness: 0.02 }));
+        body.castShadow = true; g.add(body);
+        const hat = new THREE.Mesh(new THREE.ConeGeometry(0.20, 0.42, 16),
+          new THREE.MeshStandardMaterial({ color: hatHex, roughness: 0.75, metalness: 0.03 }));
+        hat.position.y = 0.33; hat.castShadow = true; g.add(hat);
+        const nose = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 10),
+          new THREE.MeshStandardMaterial({ color: 0xffd1b3, roughness: 0.75, metalness: 0.0 }));
+        nose.position.set(0, 0.12, 0.16); nose.castShadow = true; g.add(nose);
+
+        g.userData.phase = Math.random() * Math.PI * 2;
+        g.userData.maxSpeed = 8.2;
+        g.userData.accel = 16.0;
+        g.userData.vel = new THREE.Vector3();
+        g.userData.followRadius = 3.0 + Math.random() * 1.2;
+        g.userData.catchupRadius = 9.0;
+        return g;
+      }
+      function syncGnomesToCount() {
+        while (state.gnomeHatColors.length < state.gnomes) state.gnomeHatColors.push(randomHatColorHex());
+        while (state.gnomeHatColors.length > state.gnomes) state.gnomeHatColors.pop();
+        while (gnomesGroup.children.length < state.gnomes) {
+          const idx = gnomesGroup.children.length;
+          const gn = makeGnome(state.gnomeHatColors[idx]);
+          const a = Math.random() * Math.PI * 2;
+          const r = 1.8 + Math.random() * 2.5;
+          const x = state.pos.x + Math.cos(a) * r;
+          const z = state.pos.z + Math.sin(a) * r;
+          gn.position.set(x, heightAt(x, z), z);
+          gnomesGroup.add(gn);
+        }
+        while (gnomesGroup.children.length > state.gnomes) {
+          gnomesGroup.remove(gnomesGroup.children[gnomesGroup.children.length - 1]);
+        }
+      }
+      function updateGnomes(dt) {
+        for (let i = 0; i < gnomesGroup.children.length; i++) {
+          const gn = gnomesGroup.children[i];
+          const angle = (i / Math.max(1, state.gnomes)) * Math.PI * 2 + state.yaw * 0.35;
+          const desired = new THREE.Vector3(
+            state.pos.x + Math.cos(angle) * gn.userData.followRadius,
+            0,
+            state.pos.z + Math.sin(angle) * gn.userData.followRadius
+          );
+          const gnXZ = new THREE.Vector3(gn.position.x, 0, gn.position.z);
+          const to = new THREE.Vector3().subVectors(desired, gnXZ);
+          const dist = to.length();
+          const maxSpeed = (dist > gn.userData.catchupRadius) ? (gn.userData.maxSpeed * 1.35) : gn.userData.maxSpeed;
+
+          if (dist > 0.05) {
+            to.normalize();
+            const targetVel = to.multiplyScalar(maxSpeed);
+            gn.userData.vel.x += (targetVel.x - gn.userData.vel.x) * Math.min(1, gn.userData.accel * dt);
+            gn.userData.vel.z += (targetVel.z - gn.userData.vel.z) * Math.min(1, gn.userData.accel * dt);
+          } else gn.userData.vel.multiplyScalar(Math.max(0, 1 - 10 * dt));
+
+          gn.position.x += gn.userData.vel.x * dt;
+          gn.position.z += gn.userData.vel.z * dt;
+          gn.userData.phase += dt * 2.4;
+          gn.position.y = heightAt(gn.position.x, gn.position.z) + Math.sin(gn.userData.phase) * 0.03;
+
+          const mv = new THREE.Vector3(gn.userData.vel.x, 0, gn.userData.vel.z);
+          if (mv.lengthSq() > 0.001) {
+            mv.normalize();
+            gn.lookAt(gn.position.x + mv.x, gn.position.y, gn.position.z + mv.z);
+          }
+
+          // gnome steps on egg -> collect (counts as a collect event, gemstone rolled globally)
+          const hit = nearestEggTo(new THREE.Vector3(gn.position.x, state.pos.y, gn.position.z), 1.05);
+          if (hit) collectFromWorldEgg(hit.egg);
+        }
+      }
+
+      // ----------------------------
+      // Controls (Space = collect only)
+      // ----------------------------
+      const keys = new Set();
+      window.addEventListener("keydown", (e) => {
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Space"].includes(e.code)) e.preventDefault();
+        keys.add(e.code);
+
+        if (e.code === "Space" && !overlayEl.classList.contains("show")) {
+          doCollectAction();
+        }
+      }, { passive: false });
+      window.addEventListener("keyup", (e) => keys.delete(e.code));
+
+      function forwardVector() {
+        const v = new THREE.Vector3(0, 0, -1);
+        v.applyAxisAngle(new THREE.Vector3(0, 1, 0), state.yaw);
+        v.y = 0; return v.normalize();
+      }
+      function rightVector() {
+        const v = new THREE.Vector3(1, 0, 0);
+        v.applyAxisAngle(new THREE.Vector3(0, 1, 0), state.yaw);
+        v.y = 0; return v.normalize();
+      }
+      function updateLook(dt) {
+        const yawSpeed = 1.75, pitchSpeed = 1.35;
+        if (keys.has("ArrowLeft")) state.yaw += yawSpeed * dt;
+        if (keys.has("ArrowRight")) state.yaw -= yawSpeed * dt;
+        if (keys.has("ArrowUp")) state.pitch += pitchSpeed * dt;
+        if (keys.has("ArrowDown")) state.pitch -= pitchSpeed * dt;
+        state.pitch = Math.max(-1.10, Math.min(0.70, state.pitch));
+      }
+      function updatePlayer(dt) {
+        updateLook(dt);
+        camera.rotation.order = "YXZ";
+        camera.rotation.y = state.yaw;
+        camera.rotation.x = state.pitch;
+
+        const sprint = keys.has("ShiftLeft") || keys.has("ShiftRight");
+        const speed = sprint ? 6.2 : 4.2;
+        const accel = 18.0;
+
+        const dir = new THREE.Vector3();
+        if (keys.has("KeyW")) dir.add(forwardVector());
+        if (keys.has("KeyS")) dir.sub(forwardVector());
+        if (keys.has("KeyD")) dir.add(rightVector());
+        if (keys.has("KeyA")) dir.sub(rightVector());
+        if (dir.lengthSq() > 0) dir.normalize();
+
+        const targetV = dir.multiplyScalar(speed);
+        state.vel.x += (targetV.x - state.vel.x) * Math.min(1, accel * dt);
+        state.vel.z += (targetV.z - state.vel.z) * Math.min(1, accel * dt);
+
+        state.pos.addScaledVector(state.vel, dt);
+
+        // stay on ground (no jumping)
+        const groundY = heightAt(state.pos.x, state.pos.z);
+        const eyeHeight = 1.7;
+        state.pos.y = groundY + eyeHeight;
+
+        const limit = TERRAIN_SIZE * 0.48;
+        state.pos.x = Math.max(-limit, Math.min(limit, state.pos.x));
+        state.pos.z = Math.max(-limit, Math.min(limit, state.pos.z));
+
+        camera.position.copy(state.pos);
+        markVisited(state.pos.x, state.pos.z);
+      }
+
+      function updateEggVisuals(dt) {
+        for (const egg of eggsGroup.children) {
+          egg.userData.bob += dt * 1.4;
+          const terrainY = heightAt(egg.position.x, egg.position.z);
+          egg.position.y = terrainY + 0.10 + Math.sin(egg.userData.bob) * 0.015;
+          egg.rotation.y += dt * 0.45;
+        }
+
+        // Walk-over pickup (counts as a collect event, gemstone rolled globally)
+        const hit = nearestEggTo(state.pos, 1.2);
+        if (hit) collectFromWorldEgg(hit.egg);
+      }
+
+      // Auto collect (gnomes): each "collect" is a global roll
+      let autoTimer = 0;
+      function tickAuto(dt) {
+        const cps = state.gnomes / 4;
+        if (cps <= 0) return;
+        autoTimer += cps * dt;
+        const whole = Math.floor(autoTimer);
+        if (whole > 0) {
+          autoTimer -= whole;
+          for (let i = 0; i < whole; i++) doCollectAction();
+        }
+      }
+
+      let respawnTick = 0;
+      function tickRespawn(dt) {
+        respawnTick += dt;
+        if (respawnTick >= 1.05) {
+          respawnTick = 0;
+          tryRespawnEggs();
+        }
+      }
+
+      // ----------------------------
+      // Shop + buttons
+      // ----------------------------
+      function openShop() { overlayEl.classList.add("show"); overlayEl.setAttribute("aria-hidden", "false"); }
+      function closeShop() { overlayEl.classList.remove("show"); overlayEl.setAttribute("aria-hidden", "true"); }
+
+      $("shopBtn").addEventListener("click", () => { openShop(); updateUI(countEggsNearPlayer()); });
+      $("closeShop").addEventListener("click", closeShop);
+      overlayEl.addEventListener("click", (e) => { if (e.target === overlayEl) closeShop(); });
+
+      $("buyGnome").addEventListener("click", () => {
+        const cost = gnomeCost(state.gnomes);
+        if (state.eggs < cost) return toast(`Not enough eggs. Need ${cost}.`, "bad");
+        state.eggs -= cost;
+        state.gnomes += 1;
+        state.gnomeHatColors.push(randomHatColorHex());
+        save();
+        syncGnomesToCount();
+        updateUI(countEggsNearPlayer());
+        toast("Gnome hired!", "good");
+      });
+      $("buyMax").addEventListener("click", () => {
+        let bought = 0;
+        while (true) {
+          const cost = gnomeCost(state.gnomes);
+          if (state.eggs < cost) break;
+          state.eggs -= cost;
+          state.gnomes += 1;
+          state.gnomeHatColors.push(randomHatColorHex());
+          bought++;
+        }
+        if (!bought) return toast("Not enough eggs to buy a gnome.", "bad");
+        save();
+        syncGnomesToCount();
+        updateUI(countEggsNearPlayer());
+        toast(`Bought ${bought} gnome${bought === 1 ? "" : "s"}!`, "good");
+      });
+
+      $("collectBtn").addEventListener("click", () => { doCollectAction(); updateUI(countEggsNearPlayer()); });
+
+      $("resetBtn").addEventListener("click", () => {
+        localStorage.removeItem(SAVE_KEY);
+        state.eggs = 0; state.gems = 0; state.gnomes = 0; state.eggFraction = 0;
+        state.visited = {}; state.cellEggs = {}; state.gnomeHatColors = [];
+        while (eggsGroup.children.length) eggsGroup.remove(eggsGroup.children[0]);
+        state.pos.set(0, 2.0, 6); state.vel.set(0, 0, 0);
+        syncGnomesToCount();
+        seedInitialEggs();
+        updateUI(countEggsNearPlayer());
+        toast("Reset complete.", "warn");
+        save();
+      });
+
+      // Divider + Fit
+      const divider = document.getElementById("divider");
+      let dragging = false;
+      divider.addEventListener("pointerdown", (e) => { dragging = true; divider.setPointerCapture(e.pointerId); });
+      divider.addEventListener("pointerup", (e) => { dragging = false; try { divider.releasePointerCapture(e.pointerId); } catch { } });
+      divider.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const rect = document.getElementById("layout").getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const min = 420, max = window.innerWidth - 320;
+        const w = Math.max(min, Math.min(max, x));
+        gamePane.style.width = w + "px";
+      });
+      document.getElementById("fitBtn").addEventListener("click", () => {
+        const max = window.innerWidth - 360;
+        const target = Math.max(520, Math.min(max, Math.floor(window.innerWidth * 0.72)));
+        gamePane.style.width = target + "px";
+      });
+
+      // ----------------------------
+      // Init
+      // ----------------------------
+      load();
+      syncGnomesToCount();
+      seedInitialEggs();
+      updateUI(countEggsNearPlayer());
+      toast("Space collects. Gemstone is 1/100 per collect.", "info");
+
+      // ----------------------------
+      // Loop
+      // ----------------------------
+      const clock = new THREE.Clock();
+      let uiTick = 0;
+
+      function animate() {
+        const dt = Math.min(0.033, clock.getDelta());
+
+        windUniforms.uTime.value += dt;
+        stars.material.opacity = 0.75 + Math.sin(performance.now() * 0.0007) * 0.08;
+
+        if (!overlayEl.classList.contains("show")) updatePlayer(dt);
+
+        updateEggVisuals(dt);
+        updateGnomes(dt);
+        tickAuto(dt);
+        tickRespawn(dt);
+
+        renderer.render(scene, camera);
+
+        uiTick += dt;
+        if (uiTick >= 0.15) {
+          uiTick = 0;
+          updateUI(countEggsNearPlayer());
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+    } catch (err) {
+      console.error(err);
+      fallback.classList.add("show");
+    }
+  </script>
+  <script src="main.js"></script>
+</body>
+
+</html>
