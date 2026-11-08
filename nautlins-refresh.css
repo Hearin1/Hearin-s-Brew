@@ -1,0 +1,34 @@
+/* The Nautlins: game-focused layout matching the portfolio's copper and cream palette. */
+body.portfolio-inner-page .nautlins-hero{padding:65px 22px 75px!important;text-align:center!important}
+body.portfolio-inner-page .nautlins-hero .star-content{max-width:900px!important;margin:0 auto!important;text-align:center!important}
+body.portfolio-inner-page .nautlins-hero h1{font-family:"DM Sans",Arial,sans-serif!important;font-size:clamp(3rem,7vw,6rem)!important;font-weight:800!important;letter-spacing:-.065em!important;text-align:center!important;margin:16px auto 24px!important;color:#70472f!important}
+body.portfolio-inner-page .nautlins-hero p{max-width:730px;margin:0 auto 22px!important;text-align:center!important}
+body.portfolio-inner-page .nautlins-eyebrow{font:700 .77rem "DM Sans",Arial,sans-serif!important;text-transform:uppercase;letter-spacing:.17em;color:#b36535!important}
+body.portfolio-inner-page .nautlins-cta{display:inline-block;margin-top:15px;padding:13px 22px;background:#7b4a2f;color:white!important;border-radius:5px;text-decoration:none;font-weight:700}
+body.portfolio-inner-page .nautlins-cta:hover{background:#b96738}
+body.portfolio-inner-page .nautlins-section{max-width:1240px;margin:0 auto;padding:75px clamp(20px,4vw,50px)}
+body.portfolio-inner-page .nautlins-section h2{font-family:"Fraunces",Georgia,serif!important;font-size:clamp(1.8rem,3.7vw,3.1rem)!important;letter-spacing:-.035em;line-height:1.2;color:#63402d}
+body.portfolio-inner-page .nautlins-section h3{font-family:"Fraunces",Georgia,serif!important;font-size:1.45rem;color:#78482e}
+body.portfolio-inner-page .nautlins-section p{font:400 1.05rem/1.8 "DM Sans",Arial,sans-serif;color:#5b554c}
+body.portfolio-inner-page .nautlins-intro{max-width:860px;margin:0 auto}
+body.portfolio-inner-page .nautlins-feature{display:grid;grid-template-columns:1.7fr 1fr;gap:48px;align-items:center;margin-top:70px;padding:38px;background:#f2e4d2;border:1px solid #e5c7a7;border-radius:16px}
+body.portfolio-inner-page .nautlins-feature-note{background:#fffaf2;border:1px solid #e7c9a9;padding:35px;border-radius:13px}
+body.portfolio-inner-page .nautlins-feature-note span{display:block;font-size:3rem;color:#ce793e;margin-bottom:15px}
+body.portfolio-inner-page .nautlins-feature-note strong{display:block;font:700 1.5rem "Fraunces",Georgia,serif;color:#75472e}
+body.portfolio-inner-page .nautlins-section-heading{text-align:center;max-width:780px;margin:0 auto 40px}
+body.portfolio-inner-page .nautlins-creature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+body.portfolio-inner-page .nautlins-creature{background:#fffdf8;border:1px solid #e7c5a5;border-radius:14px;overflow:hidden;box-shadow:0 8px 20px #5b3b2412}
+body.portfolio-inner-page .nautlins-creature img{width:100%;height:250px;object-fit:contain;background:#fff;image-rendering:auto}
+body.portfolio-inner-page .nautlins-creature>div{padding:18px 20px 22px;background:#f8ead9}
+body.portfolio-inner-page .nautlins-creature h3{margin:0 0 7px;font-size:1.25rem}
+body.portfolio-inner-page .nautlins-creature p{margin:0;font-size:.9rem;line-height:1.55}
+body.portfolio-inner-page .nautlins-world{background:#f6e9d7;border-radius:18px}
+body.portfolio-inner-page .nautlins-regions{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+body.portfolio-inner-page .nautlins-regions article{padding:30px;background:#fffaf3;border:1px solid #e5c6a6;border-radius:14px}
+body.portfolio-inner-page .nautlins-region-num{font:700 .8rem "DM Sans",Arial,sans-serif;letter-spacing:.12em;color:#b86d3b;text-transform:uppercase}
+body.portfolio-inner-page .nautlins-sketch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+body.portfolio-inner-page .nautlins-sketch-grid figure{margin:0;background:#fff;border:1px solid #e3c6aa;border-radius:13px;overflow:hidden}
+body.portfolio-inner-page .nautlins-sketch-grid img{display:block;width:100%;height:auto}
+body.portfolio-inner-page .nautlins-sketch-grid figcaption{padding:15px 18px;background:#f7e8d6;color:#65513e;font:500 .9rem/1.5 "DM Sans",Arial,sans-serif}
+@media(max-width:980px){body.portfolio-inner-page .nautlins-creature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){body.portfolio-inner-page .nautlins-feature,body.portfolio-inner-page .nautlins-regions,body.portfolio-inner-page .nautlins-sketch-grid{grid-template-columns:1fr}body.portfolio-inner-page .nautlins-feature{padding:22px;gap:15px}body.portfolio-inner-page .nautlins-creature-grid{grid-template-columns:1fr 1fr;gap:12px}body.portfolio-inner-page .nautlins-creature img{height:180px}body.portfolio-inner-page .nautlins-creature>div{padding:12px}body.portfolio-inner-page .nautlins-creature h3{font-size:1rem}body.portfolio-inner-page .nautlins-creature p{font-size:.83rem}}
