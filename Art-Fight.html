@@ -16,9 +16,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site-refresh.css">
+  <link rel="stylesheet" href="inner-portfolio.css">
+  <script src="inner-portfolio.js" defer></script>
 </head>
 
-<body>
+<body class="portfolio-inner-page">
     <div style="max-width: 1350px;
    margin:0 auto;
     width: 100%;
@@ -79,23 +81,12 @@
         </aside>
 
         <main id="mainContent">
-              <header>
-<button class="menu-trigger" onclick="toggleMenu()">
-            <span>☰</span> 
-        </button>
-        <div class="header-logo">
-        <a href="index.html">Hearin's Brew</a>
-    </div>
-    
-    <div class="header-links">
-        <a href="mailto:hearinsbrew@gmail.com" title="Email Me">
-            <i class="fa-solid fa-envelope"></i>
-        </a>
-        <a href="https://github.com/Hearin1" target="_blank" title="GitHub">
-            <i class="fa-brands fa-github"></i>
-        </a>
-    </div>
-        </header>
+              <header class="portfolio-inner-header">
+<a class="portfolio-inner-brand" href="index.html"><span class="portfolio-inner-mark">H<span>✦</span>B</span><span class="portfolio-inner-name">Hearin's Brew</span></a>
+<button class="portfolio-inner-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="portfolio-inner-nav">☰</button>
+<nav class="portfolio-inner-nav" id="portfolio-inner-nav" aria-label="Main navigation">
+<a href="index.html">Home</a><a href="lorcana-game-mat-concepts.html">Fantasy art</a><a href="my-ocs.html">Characters</a><a href="Art-Fight.html">Art Fight</a><a href="misc-art.html">More art</a><a href="my-sketch-book.html">Sketchbook</a><a href="other-artistic-works.html">Other projects</a><a class="portfolio-inner-contact" href="mailto:hearinsbrew@gmail.com">Say hello ↗</a>
+</nav></header>
             <section class="star-section">
                 <div class="star-overlay"></div>
                 <div class="star-content">
