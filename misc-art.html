@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="brew-footer.css">
   <link rel="stylesheet" href="centered-page-heroes.css">
   <link rel="stylesheet" href="curated-art.css">
+  <link rel="stylesheet" href="art-lightbox.css">
 </head>
 
 <body class="portfolio-inner-page">
@@ -366,15 +367,17 @@
       </section>
 
       </section>
-      <section class="brew-project-links" aria-labelledby="original-characters-heading">
-        <p class="brew-eyebrow">More from my sketchbook</p>
-        <h2 id="original-characters-heading">Original characters</h2>
-        <p>Some of my original characters, made for stories, games, and just for fun.</p>
-        <div class="brew-project-grid">
-          <article class="brew-project-card"><a href="my-ocs.html"><img src="assets/Amber.jpg" alt="Amber, an original character" loading="lazy" style="max-width:100%;height:220px;object-fit:contain"><h3>Meet my characters ↗</h3></a><p>Take a look at the characters I've dreamed up and the artwork behind them.</p></article>
-          <article class="brew-project-card"><a href="my-ocs.html"><img src="assets/Leggy In All His Glory.jpg" alt="Leggy, an original character" loading="lazy" style="max-width:100%;height:220px;object-fit:contain"><h3>More character art ↗</h3></a><p>See the rest of my original character collection.</p></article>
-        </div>
-      </section>
+      <section class="more-art-characters" aria-labelledby="original-characters-heading">
+  <div class="more-art-characters-inner">
+    <p class="brew-eyebrow">More from my sketchbook</p>
+    <h2 id="original-characters-heading">Original characters</h2>
+    <p>Some of my original characters, made for stories, games, and just for fun.</p>
+    <div class="more-art-characters-grid">
+      <article><a href="my-ocs.html"><img src="assets/Amber.jpg" alt="Amber, an original character" loading="lazy"><h3>Meet my characters ↗</h3></a><p>Take a look at the characters I've dreamed up and the artwork behind them.</p></article>
+      <article><a href="my-ocs.html"><img src="assets/Leggy In All His Glory.jpg" alt="Leggy, an original character" loading="lazy"><h3>More character art ↗</h3></a><p>See the rest of my original character collection.</p></article>
+    </div>
+  </div>
+</section>
 <footer class="brew-site-footer" role="contentinfo">
   <div class="brew-footer-inner">
     <img src="assets/HearinDrinkingGif500px.gif" alt="Hearin's drinking dwarf mascot" class="brew-footer-dwarf" loading="lazy">
@@ -384,62 +387,7 @@
   </div>
 </footer>
 
-<div id="moreArtLightbox" class="more-art-lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged artwork">
-  <button id="moreArtLightboxClose" class="more-art-lightbox-close" type="button" aria-label="Close enlarged artwork">×</button>
-  <img id="moreArtLightboxImage" alt="">
-</div>
-<script>
-(function () {
-  const dialog = document.getElementById("moreArtLightbox");
-  const preview = document.getElementById("moreArtLightboxImage");
-  const closeButton = document.getElementById("moreArtLightboxClose");
-  const main = document.getElementById("mainContent");
-  let previousFocus = null;
-  function closePreview() {
-    dialog.hidden = true;
-    preview.removeAttribute("src");
-    document.body.classList.remove("more-art-lightbox-open");
-    if (previousFocus && previousFocus.isConnected) previousFocus.focus();
-  }
-  function openPreview(img) {
-    if (!img.currentSrc && !img.src) return;
-    previousFocus = document.activeElement;
-    preview.src = img.currentSrc || img.src;
-    preview.alt = img.alt || "Enlarged artwork";
-    dialog.hidden = false;
-    document.body.classList.add("more-art-lightbox-open");
-    closeButton.focus();
-  }
-  const galleryImages = main.querySelectorAll(".brew-art-tile img, .feature-card img, .wrap .miscSingle img, .brew-curated-art img");
-  galleryImages.forEach(img => {
-    img.tabIndex = 0;
-    img.setAttribute("role", "button");
-    img.setAttribute("aria-label", "Enlarge " + (img.alt || "artwork"));
-    img.addEventListener("click", event => {
-      event.preventDefault();
-      event.stopPropagation();
-      openPreview(img);
-    });
-    img.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openPreview(img);
-      }
-    });
-  });
-  // Existing raw image anchors must never navigate away or download the image.
-  main.addEventListener("click", event => {
-    const link = event.target.closest("a[href]");
-    if (!link || !link.querySelector("img")) return;
-    if (!link.closest(".brew-art-tile, .feature-card, .wrap")) return;
-    event.preventDefault();
-    openPreview(link.querySelector("img"));
-  });
-  closeButton.addEventListener("click", closePreview);
-  dialog.addEventListener("click", event => { if (event.target === dialog) closePreview(); });
-  document.addEventListener("keydown", event => { if (event.key === "Escape" && !dialog.hidden) closePreview(); });
-})();
-</script>
+<script src="art-lightbox.js" defer></script>
 </body>
 
 </html>
