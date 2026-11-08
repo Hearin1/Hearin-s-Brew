@@ -1,7 +1,7 @@
 /* Shared, accessible artwork preview across the portfolio. */
 (() => {
   const artSelectors = [
-    ".brew-art-tile img", ".feature-card img", ".favorite-misc-art img",
+    ".brew-art-tile img", ".feature-card img", ".favorite-misc-art img", ".more-art-characters img",
     ".miscSingle img", ".art-fight img", ".artFight img",
     ".gallery img", ".gallery-grid img", ".art-gallery img",
     ".brew-art-gallery img", ".brew-project-card img",
@@ -39,6 +39,7 @@
     if (previousFocus && previousFocus.isConnected) previousFocus.focus();
   }
   images.forEach(img => {
+    img.classList.add("site-art-zoomable");
     img.tabIndex = 0;
     img.setAttribute("role", "button");
     img.setAttribute("aria-label", "Enlarge " + (img.alt || "artwork"));
