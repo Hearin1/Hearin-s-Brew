@@ -1,0 +1,18 @@
+/* Curated finished artwork. Sketchbook images are intentionally excluded. */
+body.portfolio-inner-page .brew-curated-art{max-width:1340px;margin:64px auto;padding:0 clamp(18px,4vw,48px);box-sizing:border-box}
+body.portfolio-inner-page .brew-art-heading{text-align:center;max-width:700px;margin:0 auto 30px}
+body.portfolio-inner-page .brew-art-eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#b86639;margin:0 0 10px}
+body.portfolio-inner-page .brew-art-heading h2{font:700 clamp(1.9rem,4vw,3rem)/1.2 "Fraunces",Georgia,serif;color:#65432f;margin:0 0 12px}
+body.portfolio-inner-page .brew-art-heading p:last-child{color:#6a5b50;line-height:1.65}
+body.portfolio-inner-page .brew-art-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+body.portfolio-inner-page .brew-art-tile{margin:0;background:#fffaf1;border:1px solid #e9cbb0;border-radius:16px;overflow:hidden;box-shadow:0 10px 25px #69412813}
+body.portfolio-inner-page .brew-art-tile a{display:flex;align-items:center;justify-content:center;background:#f2e8db;min-height:240px;aspect-ratio:4/3;overflow:hidden}
+body.portfolio-inner-page .brew-art-tile img{display:block;width:100%;height:100%;max-height:430px;object-fit:contain;transition:transform .25s ease}
+body.portfolio-inner-page .brew-art-tile a:hover img{transform:scale(1.035)}
+body.portfolio-inner-page .brew-art-tile figcaption{padding:17px 19px;display:flex;flex-direction:column;gap:6px;color:#65432f}
+body.portfolio-inner-page .brew-art-tile figcaption strong{font:700 1.2rem "Fraunces",Georgia,serif}
+body.portfolio-inner-page .brew-art-tile figcaption span{color:#73665b;font-size:.9rem}
+body.portfolio-inner-page .brew-misc-gallery{padding-top:48px;border-top:1px solid #e9cbb0}
+@media(max-width:900px){body.portfolio-inner-page .brew-art-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){body.portfolio-inner-page .brew-art-gallery{grid-template-columns:1fr}body.portfolio-inner-page .brew-curated-art{margin:45px auto}}
+@media(prefers-reduced-motion:reduce){body.portfolio-inner-page .brew-art-tile img{transition:none}}
