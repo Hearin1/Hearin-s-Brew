@@ -53,3 +53,9 @@
 .hero h1{font-family:"DM Sans",Arial,sans-serif;font-weight:700;letter-spacing:-.055em;font-size:clamp(2.9rem,4.5vw,5.1rem);line-height:1.12}
 .hero h1 em{font-family:"Fraunces",Georgia,serif;font-weight:600}
 @media(max-width:620px){.hero h1{font-size:clamp(2.45rem,10vw,3.3rem)}}
+
+/* Give the game-making portfolio card a centered heading. */
+.work-card[href="the-nautlins.html"] .work-caption{text-align:center;justify-content:center}
+.work-card[href="the-nautlins.html"] .work-caption>div{width:100%}
+.work-card[href="the-nautlins.html"] .work-arrow{position:absolute;right:16px;bottom:16px}
+.work-card[href="the-nautlins.html"]{position:relative}
