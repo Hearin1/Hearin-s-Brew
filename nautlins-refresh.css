@@ -34,19 +34,21 @@ body.portfolio-inner-page .nautlins-sketch-grid figcaption{padding:15px 18px;bac
 @media(max-width:650px){body.portfolio-inner-page .nautlins-feature,body.portfolio-inner-page .nautlins-regions,body.portfolio-inner-page .nautlins-sketch-grid{grid-template-columns:1fr}body.portfolio-inner-page .nautlins-feature{padding:22px;gap:15px}body.portfolio-inner-page .nautlins-creature-grid{grid-template-columns:1fr 1fr;gap:12px}body.portfolio-inner-page .nautlins-creature img{height:180px}body.portfolio-inner-page .nautlins-creature>div{padding:12px}body.portfolio-inner-page .nautlins-creature h3{font-size:1rem}body.portfolio-inner-page .nautlins-creature p{font-size:.83rem}}
 
 
-/* Explicit three-column hero overrides legacy star-section positioning. */
-body.portfolio-inner-page .nautlins-hero{display:block!important;min-height:0!important;padding:80px clamp(20px,4vw,70px) 85px!important}
-body.portfolio-inner-page .nautlins-hero-layout{display:grid!important;grid-template-columns:minmax(220px,1fr) minmax(0,820px) minmax(220px,1fr);align-items:start;gap:clamp(20px,3vw,55px);width:100%;max-width:1700px;margin:0 auto;position:relative;z-index:2}
-body.portfolio-inner-page .nautlins-hero .star-content.nautlins-hero-copy{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;position:static!important;float:none!important;width:100%!important;max-width:820px!important;min-width:0!important;margin:0 auto!important;padding:0!important;transform:none!important;left:auto!important;right:auto!important;top:auto!important;text-align:center!important}
-body.portfolio-inner-page .nautlins-hero-copy>*{width:auto!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;float:none!important;text-align:center!important}
-body.portfolio-inner-page .nautlins-hero-copy h1{display:block!important;width:100%!important;max-width:none!important;font-size:clamp(3.3rem,5.5vw,6rem)!important;line-height:1.1!important;margin:18px auto 24px!important}
-body.portfolio-inner-page .nautlins-hero-copy>p:not(.nautlins-eyebrow){max-width:680px!important}
-body.portfolio-inner-page .nautlins-other-games{width:100%;align-self:start;background:#fffaf3e8;border:1px solid #dfbd9c;border-radius:14px;padding:22px;box-shadow:0 8px 25px #7a4c2810;text-align:left}
-body.portfolio-inner-page .nautlins-other-games .nautlins-eyebrow{text-align:left!important;margin:0 0 12px!important;font-size:.7rem!important}
-body.portfolio-inner-page .nautlins-other-games a{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:#69432e;border-top:1px solid #e7d0b6;padding:14px 0;font-family:"DM Sans",Arial,sans-serif}
-body.portfolio-inner-page .nautlins-other-games a strong{font-size:1rem}
-body.portfolio-inner-page .nautlins-other-games a span{font-size:.82rem;color:#806a58}
-body.portfolio-inner-page .nautlins-other-games a:hover strong{color:#c66c36}
-body.portfolio-inner-page .nautlins-other-games a[aria-current=page]{opacity:.7}
-@media(max-width:1100px){body.portfolio-inner-page .nautlins-hero-layout{grid-template-columns:minmax(0,1fr) 235px}body.portfolio-inner-page .nautlins-hero-spacer{display:none}}
-@media(max-width:700px){body.portfolio-inner-page .nautlins-hero-layout{grid-template-columns:1fr;gap:36px}body.portfolio-inner-page .nautlins-hero{padding:55px 20px!important}body.portfolio-inner-page .nautlins-other-games{max-width:440px;margin:0 auto}body.portfolio-inner-page .nautlins-hero-copy h1{font-size:clamp(2.8rem,11vw,4rem)!important}}
+
+/* Clean hero: the center column is centered relative to the viewport, not to the games list. */
+body.portfolio-inner-page .nautlins-hero{position:relative;display:block!important;min-height:410px!important;margin:0!important;padding:78px 290px 90px!important;background:radial-gradient(circle at 12% 25%,#f2d4b0 0,transparent 42%),#f7e9d6!important}
+body.portfolio-inner-page .nautlins-hero-layout{display:block!important;position:relative!important;max-width:1600px!important;width:100%!important;margin:0 auto!important}
+body.portfolio-inner-page .nautlins-hero .nautlins-hero-copy{position:relative!important;inset:auto!important;transform:none!important;float:none!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:0!important;max-width:760px!important;width:100%!important;margin:0 auto!important;padding:0!important;text-align:center!important}
+body.portfolio-inner-page .nautlins-hero .nautlins-hero-copy h1{font:800 clamp(3.3rem,5.5vw,5.8rem)/1.1 "DM Sans",Arial,sans-serif!important;letter-spacing:-.055em!important;color:#70472f!important;text-align:center!important;width:100%!important;margin:18px auto 22px!important}
+body.portfolio-inner-page .nautlins-hero .nautlins-hero-copy p{max-width:670px!important;text-align:center!important;margin:0 auto 20px!important;font:500 1.06rem/1.75 "DM Sans",Arial,sans-serif!important;color:#66584e!important}
+body.portfolio-inner-page .nautlins-hero .nautlins-hero-copy .nautlins-eyebrow{font-size:.76rem!important;color:#b36535!important;letter-spacing:.14em!important}
+body.portfolio-inner-page .nautlins-hero .nautlins-cta{margin:10px auto 0!important}
+body.portfolio-inner-page .nautlins-other-games{position:absolute!important;top:0!important;left:auto!important;right:-270px!important;bottom:auto!important;width:245px!important;max-width:245px!important;float:none!important;transform:none!important;display:block!important;background:#fffaf3!important;border:1px solid #dfbd9c!important;border-radius:14px!important;padding:22px!important;box-shadow:0 8px 25px #7a4c2810!important;text-align:left!important;z-index:4}
+body.portfolio-inner-page .nautlins-other-games .nautlins-eyebrow{font:700 .7rem/1.5 "DM Sans",Arial,sans-serif!important;letter-spacing:.12em!important;color:#a75b32!important;text-align:left!important;margin:0 0 12px!important}
+body.portfolio-inner-page .nautlins-other-games a{display:flex!important;flex-direction:column!important;gap:4px!important;text-decoration:none!important;color:#69432e!important;border-top:1px solid #e7d0b6!important;padding:13px 0!important;font-family:"DM Sans",Arial,sans-serif!important}
+body.portfolio-inner-page .nautlins-other-games a strong{font-size:.98rem!important}
+body.portfolio-inner-page .nautlins-other-games a span{font-size:.8rem!important;color:#806a58!important}
+body.portfolio-inner-page .nautlins-other-games a:hover strong{color:#c66c36!important}
+body.portfolio-inner-page .nautlins-other-games a[aria-current="page"]{opacity:.7}
+@media(max-width:1100px){body.portfolio-inner-page .nautlins-hero{padding:65px 28px 65px!important}body.portfolio-inner-page .nautlins-hero-layout{display:flex!important;flex-direction:column!important;align-items:center!important;gap:35px!important}body.portfolio-inner-page .nautlins-other-games{position:static!important;width:min(100%,500px)!important;max-width:500px!important;margin:0 auto!important}}
+@media(max-width:650px){body.portfolio-inner-page .nautlins-hero{padding:50px 18px!important}body.portfolio-inner-page .nautlins-hero .nautlins-hero-copy h1{font-size:clamp(2.8rem,10vw,4rem)!important}}
