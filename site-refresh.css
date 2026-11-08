@@ -1,0 +1,29 @@
+/* Shared visual refresh for the existing project pages. Page-specific layouts remain intact. */
+:root{--primary-orange:#ae6844;--orange-hover:#8d5035;--sidebar-bg:#f6f3ec;--text-dark:#1b2724;--text-muted:#637069;--bg-main:#f9f7f1;--sidebar-width:260px}
+body{background:var(--bg-main);color:var(--text-dark)}
+body,button,input,textarea,select{font-family:"DM Sans",Arial,sans-serif}
+h1,h2,h3,.brand-logo,.header-logo,.feature-title,.divider h2{font-family:"Fraunces",Georgia,serif}
+aside{background:#f5f2eb;border-right:1px solid #e2ded3;box-shadow:4px 0 22px #19231c08}
+.brand-logo{color:#28372f;letter-spacing:-.03em;font-size:1.25rem}
+.sidebar-header{border-color:#dfdbd1}
+.nav-link{border-radius:6px;font-family:"DM Sans",Arial,sans-serif;font-size:.91rem}
+.nav-link:hover,.nav-link.active{background:#eae5db;color:#9e5d3b}
+.dropdown-menu{background:#eeeae1}
+.sidebar-footer{font-size:.85rem}
+.sidebar-footer a{color:#985c3d;overflow-wrap:anywhere}
+main>header{background:#f9f7f1!important;border-bottom:1px solid #e4e0d7!important;box-shadow:none!important}
+.header-logo a{color:#1c2925!important;font-family:"Fraunces",Georgia,serif!important;letter-spacing:-.03em;text-decoration:none}
+.menu-trigger{background:#1c2925!important;color:white!important;border-radius:4px!important}
+.header-links a{color:#28372f}
+.divider{margin-top:55px!important;margin-bottom:25px!important}
+.divider h2{color:#1e2925;letter-spacing:-.025em}
+.main-footer{background:#17221e!important;color:#f6f1e8!important;margin-top:75px}
+.main-footer .footer-tagline,.main-footer .footer-bottom-line{color:#c9cec5!important}
+.star-section{border-radius:0!important}
+.star-content p{line-height:1.75}
+.story-visual img,.image img,.ocs-image img{object-fit:cover}
+.story-split-container{gap:clamp(20px,4vw,70px)}
+.story-card-vibrant{box-shadow:0 12px 32px #0000000c}
+a:focus-visible,button:focus-visible{outline:3px solid #bd774d;outline-offset:3px}
+@media(max-width:992px){aside{box-shadow:10px 0 30px #0002}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
