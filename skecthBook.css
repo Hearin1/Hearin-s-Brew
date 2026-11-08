@@ -292,3 +292,15 @@ body {
     font-size: 16px;
   }
 }
+/* Larger book and a taller, more compact introduction on desktop. */
+@media (min-width: 981px) {
+  .layout { grid-template-columns: minmax(230px, 30%) minmax(0, 70%); gap: 12px; align-items: stretch; }
+  .controls { justify-content: center; align-self: stretch; }
+  .header1 { width: 100%; }
+  .header1 .glow { padding: 42px 16px; min-height: 390px; display: flex; flex-direction: column; justify-content: center; }
+  .header1 h1 { font-size: clamp(30px, 3vw, 44px); line-height: 1.18; margin-bottom: 24px; }
+  .header1 p { font-size: clamp(16px, 1.35vw, 19px); line-height: 1.75; margin-bottom: 0; }
+}
+/* A clean, unpatterned loading state inside each paper page. */
+.page .status { background: transparent; color: #5e5248; font-size: 13px; text-align: center; }
+.page img:not([src]) { opacity: 0; }
