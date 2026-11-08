@@ -22,3 +22,29 @@
 .hero-art img{box-shadow:24px 24px 0 #e7dfd2,0 0 35px #3479bf1a}
 .work-card:hover .work-arrow{color:var(--signature-blue)}
 @media(prefers-reduced-motion:reduce){.animated-wordmark .color-letter{animation:none!important;color:var(--signature-blue)}.magic-sparkles span,.magic-word:after{animation:none!important}}
+
+/* A bigger signature and warmer copper/orange palette */
+:root{--copper:#ba693d;--signature-orange:#f08432;--signature-brown:#805038;--cream:#faf4e8;--paper:#fffcf6}
+.site-header{min-height:108px;height:auto;gap:24px;background:#faf4e8;border-bottom:2px solid #e5c8ac}
+.wordmark{font-size:clamp(1.7rem,3vw,2.85rem);gap:17px;line-height:1.15;padding:18px 0}
+.mark{height:58px;width:58px;flex-shrink:0;background:#5b392c;border:2px solid #d58c54;font-size:19px}
+.animated-wordmark .color-letter{animation-duration:7s}
+.hero{background:radial-gradient(ellipse at 15% 35%,#f2d4b03d,transparent 55%),var(--cream)}
+.hero .eyebrow,.work-kicker{color:#a6542b}
+.hero h1 em,.section-heading h2 em,.feature-story h2 em,.other-work h2 em,.contact-section h2 em{color:#cb753d}
+.button-primary{background:#70452f}.button-primary:hover{background:#a45a31}
+.intro-band{background:#68452f}.feature-story{background:#f0e0cc}
+.work-image{background:#e8d6bf}.work-card:hover h3{color:#b45f31}
+.work-arrow{color:#c57343}
+.contact-section{background:radial-gradient(circle at 15% 20%,#9d542c70,transparent 40%),#372b26}
+.contact-section .eyebrow{color:#f6b57b}
+.site-footer{background:#f0e2cf}
+.hero-art-controls{position:absolute;z-index:4;right:10px;top:12px;display:flex;align-items:center;gap:10px;background:#fffaf0eb;padding:7px 10px;border:1px solid #d8b694;border-radius:99px;box-shadow:0 5px 22px #0002}
+.art-cycle-button{border:0;border-radius:50%;background:#70452f;color:#fff;width:36px;height:36px;cursor:pointer;font-size:25px;line-height:1}
+.art-cycle-button:hover{background:#d16d31}
+.art-cycle-button:focus-visible{outline:3px solid #3278bb;outline-offset:3px}
+.art-cycle-count{font-size:.8rem;font-weight:700;min-width:42px;text-align:center;color:#70452f}
+.art-tag{text-decoration:none;color:#3a2b23}
+.art-tag:hover{color:#b45f31}
+@media(max-width:950px){.site-nav{top:100%}.wordmark{font-size:clamp(1.45rem,4vw,2.3rem)}}
+@media(max-width:620px){.mark{width:42px;height:42px;font-size:13px}.wordmark{gap:8px;font-size:1.45rem}.site-header{min-height:84px}.hero-art-controls{top:8px;right:8px}}
