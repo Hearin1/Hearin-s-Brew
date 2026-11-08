@@ -263,3 +263,11 @@ section {
   }
 
 }
+/* Consistent image enlargement on More Art; never open raw image files. */
+.brew-art-tile img, .feature-card img, .wrap .miscSingle img { cursor: zoom-in; }
+.brew-art-tile img:focus-visible, .feature-card img:focus-visible, .wrap .miscSingle img:focus-visible { outline: 3px solid #c97945; outline-offset: 4px; }
+.more-art-lightbox[hidden] { display: none !important; }
+.more-art-lightbox { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 64px 24px 24px; background: rgba(12,10,15,.86); cursor: zoom-out; }
+.more-art-lightbox img { display: block; max-width: min(92vw, 1200px); max-height: 85vh; width: auto; height: auto; object-fit: contain; border-radius: 6px; box-shadow: 0 16px 60px rgba(0,0,0,.5); cursor: default; }
+.more-art-lightbox-close { position: absolute; top: 16px; right: 22px; width: 48px; height: 48px; border: none; border-radius: 50%; background: #fff; color: #34251f; font-size: 34px; line-height: 1; cursor: pointer; }
+body.more-art-lightbox-open { overflow: hidden; }
