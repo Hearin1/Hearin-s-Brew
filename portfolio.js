@@ -27,3 +27,31 @@ if (animatedWordmark) {
     return span;
   }));
 }
+
+const featuredArtwork = [
+  {src:"assets/Pooh Bear P4.jpg",alt:"Pooh in a fantasy-inspired illustration",name:"Pooh / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
+  {src:"assets/Tigger p2.jpg",alt:"Tigger with a sword in a fantasy illustration",name:"Tigger / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
+  {src:"assets/piglet P2.jpg",alt:"Piglet in a fantasy illustration",name:"Piglet / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
+  {src:"assets/Kanga and roo.jpg",alt:"Kanga and Roo in a fantasy illustration",name:"Kanga & Roo / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
+  {src:"assets/Mickey p2.jpg",alt:"Mickey in a fantasy illustration",name:"Mickey / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
+  {src:"assets/Amber.jpg",alt:"Amber, an original character illustration",name:"Amber / Original characters",href:"my-ocs.html"}
+];
+const featuredImage=document.getElementById("featured-art-image");
+const featuredLink=document.getElementById("featured-art-link");
+const featuredCount=document.querySelector(".art-cycle-count");
+if(featuredImage&&featuredLink&&featuredCount){
+  let current=0;
+  function showArtwork(index){
+    current=(index+featuredArtwork.length)%featuredArtwork.length;
+    const art=featuredArtwork[current];
+    featuredImage.src=art.src;
+    featuredImage.alt=art.alt;
+    featuredLink.textContent=art.name+" ↗";
+    featuredLink.href=art.href;
+    featuredCount.textContent=(current+1)+" / "+featuredArtwork.length;
+  }
+  document.querySelectorAll(".art-cycle-button").forEach(button=>{
+    button.addEventListener("click",()=>showArtwork(current+Number(button.dataset.direction)));
+  });
+  featuredArtwork.slice(1).forEach(art=>{const preload=new Image();preload.src=art.src;});
+}
