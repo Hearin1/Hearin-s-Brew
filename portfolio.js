@@ -34,7 +34,9 @@ const featuredArtwork = [
   {src:"assets/piglet P2.jpg",alt:"Piglet in a fantasy illustration",name:"Piglet / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
   {src:"assets/Kanga and roo.jpg",alt:"Kanga and Roo in a fantasy illustration",name:"Kanga & Roo / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
   {src:"assets/Mickey p2.jpg",alt:"Mickey in a fantasy illustration",name:"Mickey / Fantasy concepts",href:"lorcana-game-mat-concepts.html"},
-  {src:"assets/Amber.jpg",alt:"Amber, an original character illustration",name:"Amber / Original characters",href:"my-ocs.html"}
+  {src:"assets/Amber.jpg",alt:"Amber, an original character illustration",name:"Amber / Original characters",href:"my-ocs.html"},
+  {src:"assets/jinx.png",alt:"Jinx Listens, a quiet scene with Jinx",name:"Jinx Listens / More artwork",href:"misc-art.html"},
+  {src:"assets/seance.png",alt:"The séance, friends gathered around candles",name:"The séance / More artwork",href:"misc-art.html"}
 ];
 const featuredImage=document.getElementById("featured-art-image");
 const featuredLink=document.getElementById("featured-art-link");
