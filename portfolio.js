@@ -49,6 +49,8 @@ if(featuredImage&&featuredLink&&featuredCount){
     featuredImage.alt=art.alt;
     featuredLink.textContent=art.name+" ↗";
     featuredLink.href=art.href;
+    const imageLink=document.getElementById("featured-art-image-link");
+    if(imageLink) imageLink.href=art.href;
     featuredCount.textContent=(current+1)+" / "+featuredArtwork.length;
   }
   document.querySelectorAll(".art-cycle-button").forEach(button=>{
