@@ -224,22 +224,15 @@
           }
 
           // DESKTOP / TABLET
-          const availableH = Math.max(window.innerHeight - 80, 260);
+          const availableH = Math.max(window.innerHeight - 110, 340);
           const widthByHeight = availableH / effectiveAspect;
 
-          const edgeRight = parseInt(
-            getComputedStyle(document.documentElement).getPropertyValue('--edge-right')
-          ) || 0;
-
-          const maxColumnW = Math.min(
-            window.innerWidth * 0.95,
-            window.innerWidth - edgeRight - 24
-          );
+          const maxColumnW = Math.max(300, document.querySelector(".bookWrap").clientWidth - 8);
 
           let w = Math.max(300, Math.min(widthByHeight, maxColumnW));
           let h = w * effectiveAspect;
 
-          const scale = cssVar('--book-scale', 0.86);
+          const scale = 1;
           w *= scale;
           h *= scale;
 
@@ -296,7 +289,7 @@
           applyFray(rightPage);
 
           const [L, R] = pickTwo(allImages);
-          stageEl.querySelectorAll(".status").forEach(m => m.style.display = "grid");
+          stageEl.querySelectorAll(".status").forEach(m => { m.textContent = "Loading…"; m.style.display = "grid"; });
           setImageWithFade(leftImg, L);
           setImageWithFade(rightImg, R);
         }
