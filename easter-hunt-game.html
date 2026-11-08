@@ -360,10 +360,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="brew-footer.css">
 </head>
 
 <body class="portfolio-inner-page">
@@ -556,10 +552,14 @@
     const fallback = document.getElementById("fallback");
     const gamePane = document.getElementById("gamePane");
     // Right-click is handled by the game, not the browser menu.
-    gamePane.addEventListener("contextmenu", (event) => event.preventDefault());
-    gamePane.addEventListener("mousedown", (event) => {
-      if (event.button === 2) event.preventDefault();
-    });
+    // Prevent the browser context menu throughout the full-screen game.
+    // Do not navigate, release focus or close the game on right mouse button.
+    document.addEventListener("contextmenu", (event) => event.preventDefault(), { capture: true });
+    document.addEventListener("pointerdown", (event) => {
+      if (event.button === 2 && gamePane.contains(event.target)) {
+        event.preventDefault();
+      }
+    }, { capture: true });
 
 
     try {
@@ -1286,8 +1286,6 @@ uniform float uTime; uniform float uWindStrength; uniform float uWindSpeed;`);
       fallback.classList.add("show");
     }
   </script>
-
-<footer class="brew-site-footer" role="contentinfo"><div class="brew-footer-inner"><img src="assets/HearinDrinkingGif500px.gif" alt="Hearin's drinking dwarf mascot" class="brew-footer-dwarf" loading="lazy"><div class="brew-footer-name">Hearin's <span>Brew</span></div><p>Crafting code, art, and games</p><small>© 2026 Hearin's Brew. All rights reserved.</small></div></footer>
 </body>
 
 </html>
