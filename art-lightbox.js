@@ -10,6 +10,7 @@
   ];
   const images = [...new Set([...document.querySelectorAll(artSelectors.join(","))])]
     .filter(img => !img.closest("header, footer, nav, .star-content, .portfolio-inner-header, .brew-site-footer, .sketch-zoom, .more-art-lightbox")
+      && !document.getElementById("featured-art-image")
       && !img.classList.contains("brew-footer-dwarf") && !img.closest("[data-no-zoom]"));
   if (!images.length) return;
   const overlay = document.createElement("div");
