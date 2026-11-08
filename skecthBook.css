@@ -304,3 +304,29 @@ body {
 /* A clean, unpatterned loading state inside each paper page. */
 .page .status { background: transparent; color: #5e5248; font-size: 13px; text-align: center; }
 .page img:not([src]) { opacity: 0; }
+
+/* Click an artwork to inspect it in place, never navigate to its raw file. */
+.page img { pointer-events: auto; cursor: zoom-in; }
+.page img:focus-visible { outline: 3px solid #ffa433; outline-offset: 3px; }
+.sketch-zoom[hidden] { display: none !important; }
+.sketch-zoom {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 64px 24px 24px;
+  background: rgba(12, 10, 20, .85);
+  cursor: zoom-out;
+}
+.sketch-zoom img {
+  display: block; width: auto; height: auto;
+  max-width: min(90vw, 1100px); max-height: 82vh;
+  object-fit: contain; border-radius: 5px;
+  box-shadow: 0 12px 50px rgba(0,0,0,.4);
+  cursor: default;
+}
+.sketch-zoom-close {
+  position: absolute; top: 16px; right: 24px;
+  border: 0; border-radius: 50%; width: 44px; height: 44px;
+  background: #fff; color: #241c20; font-size: 32px; line-height: 1;
+  cursor: pointer;
+}
+body.sketch-zoom-open { overflow: hidden; }
