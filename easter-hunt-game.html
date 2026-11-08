@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Egg Collector 3D - Resizable Pane</title>
-  <link rel="stylesheet" href="easterHunt.css">
-  <link rel="stylesheet" href="mediaQuery.css">
+
+
   <link rel="icon" type="image/png" href="assets/favicon.ico">
 
   <style>
@@ -360,9 +360,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-refresh.css">
-  <link rel="stylesheet" href="inner-portfolio.css">
-  <script src="inner-portfolio.js" defer></script>
+
+
+
 </head>
 
 <body class="portfolio-inner-page">
@@ -558,7 +558,17 @@
     const gamePane = document.getElementById("gamePane");
 
     try {
-      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js");
+      // Try a pinned, known release on two CDNs. Do not depend on the site's other scripts.
+      let THREE;
+      let importError;
+      for (const url of [
+        "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "https://unpkg.com/three@0.160.1/build/three.module.js"
+      ]) {
+        try { THREE = await import(url); break; }
+        catch (error) { importError = error; console.warn("Three.js import failed:", url, error); }
+      }
+      if (!THREE) throw new Error("Could not load Three.js from either CDN. " + (importError?.message || ""));
 
       // ----------------------------
       // Save / state
@@ -605,7 +615,7 @@
         gnomeCostEl = $("gnomeCost"), toastEl = $("toast"), overlayEl = $("overlay"),
         versionEl = $("version");
 
-      versionEl.textContent = "three r182 / 0.182.0";
+      versionEl.textContent = "three r160 / 0.160.1";
 
       let toastTimer = 0;
       function toast(msg, tone = "info") {
@@ -1266,10 +1276,12 @@ uniform float uTime; uniform float uWindStrength; uniform float uWindSpeed;`);
 
     } catch (err) {
       console.error(err);
+      const details = fallback.querySelector(".box > div:nth-child(2)");
+      if (details) details.textContent = "The 3D game could not start: " + (err?.message || String(err)) + ". Check that WebGL is enabled and external scripts are not blocked.";
       fallback.classList.add("show");
     }
   </script>
-  <script src="main.js"></script>
+
 </body>
 
 </html>
