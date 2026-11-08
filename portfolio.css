@@ -48,3 +48,8 @@
 .art-tag:hover{color:#b45f31}
 @media(max-width:950px){.site-nav{top:100%}.wordmark{font-size:clamp(1.45rem,4vw,2.3rem)}}
 @media(max-width:620px){.mark{width:42px;height:42px;font-size:13px}.wordmark{gap:8px;font-size:1.45rem}.site-header{min-height:84px}.hero-art-controls{top:8px;right:8px}}
+
+/* Keep the headline friendly and readable instead of a dramatic display font. */
+.hero h1{font-family:"DM Sans",Arial,sans-serif;font-weight:700;letter-spacing:-.055em;font-size:clamp(2.9rem,4.5vw,5.1rem);line-height:1.12}
+.hero h1 em{font-family:"Fraunces",Georgia,serif;font-weight:600}
+@media(max-width:620px){.hero h1{font-size:clamp(2.45rem,10vw,3.3rem)}}
