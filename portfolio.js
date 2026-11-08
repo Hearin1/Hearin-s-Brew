@@ -14,3 +14,16 @@ if (navToggle && nav) {
 }
 const year = document.getElementById("year");
 if (year) year.textContent = new Date().getFullYear();
+
+const animatedWordmark = document.querySelector(".animated-wordmark");
+if (animatedWordmark) {
+  const letters = Array.from(animatedWordmark.textContent);
+  animatedWordmark.replaceChildren(...letters.map((character, index) => {
+    const span = document.createElement("span");
+    span.className = "color-letter";
+    span.style.setProperty("--letter-index", index);
+    span.textContent = character === " " ? "\u00a0" : character;
+    span.setAttribute("aria-hidden", "true");
+    return span;
+  }));
+}
