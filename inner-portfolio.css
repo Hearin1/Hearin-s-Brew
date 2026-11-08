@@ -34,3 +34,21 @@ body.portfolio-inner-page:after{content:"✦";position:fixed;right:24px;bottom:1
 @media(max-width:1250px){body.portfolio-inner-page main#mainContent>.portfolio-inner-header{flex-wrap:wrap}.portfolio-inner-nav{width:100%;justify-content:space-between;gap:10px}}
 @media(max-width:780px){body.portfolio-inner-page main#mainContent>.portfolio-inner-header{min-height:82px!important;flex-wrap:nowrap!important;padding:14px 20px!important}.portfolio-inner-mark{width:43px;height:43px;font-size:13px}.portfolio-inner-name{font-size:1.6rem}.portfolio-inner-toggle{display:block}.portfolio-inner-nav{display:none!important;position:absolute;top:100%;left:0;right:0;background:#faf4e8;padding:20px!important;box-shadow:0 16px 28px #4c332333;flex-direction:column;align-items:stretch;gap:3px}.portfolio-inner-nav.open{display:flex!important}.portfolio-inner-nav a{padding:10px 5px}.portfolio-inner-nav .portfolio-inner-contact{padding:11px}.portfolio-inner-header{z-index:500!important}body.portfolio-inner-page .star-content h1{font-size:clamp(2rem,8vw,3.5rem)!important}}
 @media(prefers-reduced-motion:reduce){.portfolio-inner-nav a{transition:none}}
+
+
+/* Magic is decorative and never blocks artwork or controls. */
+body.portfolio-inner-page .inner-magic-field{position:relative;isolation:isolate;overflow:hidden}
+body.portfolio-inner-page .inner-magic-field>.inner-magic-sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+body.portfolio-inner-page .inner-magic-field>*:not(.inner-magic-sparkles){position:relative;z-index:1}
+body.portfolio-inner-page .inner-magic-sparkles span{position:absolute;display:block;color:#d67b43;font-size:clamp(15px,2vw,29px);opacity:.35;text-shadow:0 0 13px #e8853c66;animation:inner-magic-float 6s ease-in-out infinite}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(1){left:5%;top:13%;animation-delay:-1s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(2){left:35%;top:8%;color:#3479bf;animation-delay:-3s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(3){right:7%;top:17%;animation-delay:-2s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(4){left:15%;bottom:14%;color:#3479bf;animation-delay:-4s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(5){right:19%;bottom:12%;animation-delay:-5s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(6){right:38%;bottom:24%;color:#3479bf;animation-delay:-2.5s}
+body.portfolio-inner-page .inner-magic-sparkles span:nth-child(7){right:3%;top:52%;animation-delay:-3.5s}
+@keyframes inner-magic-float{0%,100%{transform:translateY(0) rotate(0) scale(.9);opacity:.2}50%{transform:translateY(-17px) rotate(20deg) scale(1.16);opacity:.6}}
+/* Smooth CSS enlargement of low-resolution art without altering source files. */
+body.portfolio-inner-page img[src$="/pixel.png"],body.portfolio-inner-page img[src$="/nautlin.gif"]{image-rendering:auto!important;-ms-interpolation-mode:bicubic}
+@media(prefers-reduced-motion:reduce){body.portfolio-inner-page .inner-magic-sparkles span{animation:none!important}}
