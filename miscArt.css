@@ -284,3 +284,14 @@ body.more-art-lightbox-open { overflow: hidden; }
 .more-art-characters-grid h3 { margin:14px 0 8px; font-size:21px; }
 .more-art-characters-grid article p { margin:0; line-height:1.5; }
 @media(max-width:640px){.more-art-characters-grid{grid-template-columns:1fr}.more-art-characters{padding:40px 16px 56px}}
+
+/* Repair the old miscellaneous gallery's narrow, uneven cards. */
+.favorite-misc-art { max-width:1100px; margin:48px auto 56px; padding:0 20px; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; overflow:visible; }
+.favorite-misc-art .wrap { min-width:0; background:#fffaf4; border:1px solid #eacdb8; border-radius:14px; overflow:hidden; box-shadow:0 8px 22px #0000000d; }
+.favorite-misc-art .miscSingle { height:240px; margin:0; border-radius:0; background:#f1e5d9; }
+.favorite-misc-art .miscSingle img { width:100%; height:100%; object-fit:contain; }
+.favorite-misc-art .caption-box { padding:16px 18px 20px; }
+.favorite-misc-art .caption-title { font-size:21px; line-height:1.3; color:#75462f; }
+.favorite-misc-art .d { font-size:14px; line-height:1.55; margin-top:8px; }
+@media(max-width:850px){.favorite-misc-art{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.favorite-misc-art{grid-template-columns:1fr;padding:0 14px}}
